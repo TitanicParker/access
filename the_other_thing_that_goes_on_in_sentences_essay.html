@@ -1,0 +1,730 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Other Thing That Goes On in Sentences</title><style>
+:root{--paper:#f5f0e6;--ink:#17191a;--muted:#5d625f;--rust:#8a3f2d;--gold:#b8872e;--blue:#294f68;--panel:#fffdf8;--line:#d7cfbf;--night:#1d2529;--max:930px}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font-family:Georgia,'Times New Roman',serif;line-height:1.72;font-size:18px}
+a{color:var(--blue)}
+.hero{min-height:78vh;display:flex;align-items:flex-end;padding:72px 28px 60px;background:radial-gradient(circle at 80% 20%,rgba(184,135,46,.25),transparent 28%),linear-gradient(135deg,#172126,#293b43 60%,#704133);color:#fff}
+.hero-inner{width:min(1120px,100%);margin:auto}.kicker{font:700 .78rem/1.2 Arial,sans-serif;letter-spacing:.19em;text-transform:uppercase;color:#f1c978}.hero h1{font-size:clamp(3.4rem,9vw,7.8rem);line-height:.88;max-width:1050px;margin:.2em 0 .22em;font-weight:600}.hero .sub{max-width:800px;font-size:1.28rem;color:#e4e2dc}.meta{display:flex;gap:10px;flex-wrap:wrap;margin-top:28px;font:600 .8rem Arial,sans-serif}.meta span{border:1px solid rgba(255,255,255,.25);border-radius:99px;padding:8px 12px;background:rgba(255,255,255,.07)}
+nav{position:sticky;top:0;z-index:20;background:rgba(245,240,230,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);overflow:auto}nav div{display:flex;gap:18px;width:max-content;min-width:100%;padding:12px 22px;font:600 .82rem Arial,sans-serif}nav a{text-decoration:none;color:#333}
+main{width:min(var(--max),calc(100% - 36px));margin:auto;padding:50px 0 100px}article>h1{display:none}.deck{font-size:1.35rem;color:var(--muted);margin:0 0 2.4em;font-style:italic}h2{font-size:2.5rem;line-height:1.12;margin:2.2em 0 .5em;color:#222}h3{font-size:1.45rem;margin:1.8em 0 .45em;color:var(--rust)}p{margin:0 0 1.25em}strong{color:#181818}hr{border:0;border-top:1px solid var(--line);margin:3.5em 0}
+blockquote{margin:2em 0;padding:1.15em 1.35em;border-left:5px solid var(--gold);background:var(--panel);box-shadow:0 8px 25px rgba(45,38,26,.06);font-size:1.15rem}blockquote p:last-child{margin-bottom:0}
+.thesis-statement{position:relative;font-size:clamp(1.35rem,2.7vw,1.8rem);line-height:1.48;background:#fffaf0;color:var(--ink);border:1px solid #d8c394;border-left:7px solid var(--gold);border-radius:14px;padding:1.7em 1.65em 1.35em;box-shadow:0 10px 30px rgba(45,38,26,.09)}.thesis-statement::before{content:'THE CENTRAL PROPOSITION';display:block;margin-bottom:.8rem;font:700 .72rem/1.2 Arial,sans-serif;letter-spacing:.16em;color:var(--rust)}.thesis-statement strong{color:var(--ink)}
+article ol,article ul{padding-left:1.4em}code{background:#ebe4d7;padding:.12em .32em;border-radius:4px}
+.callout{margin:2.5em 0;padding:1.4em 1.5em;background:#eee3d1;border:1px solid #d5c2a5;border-radius:14px}.callout strong{color:var(--rust)}
+#appendix{margin-top:90px;padding-top:45px;border-top:3px double var(--line)}#appendix>h2{margin-top:0}.lede{font-size:1.12rem;color:var(--muted)}
+.sentence-card{background:var(--panel);border:1px solid var(--line);border-radius:12px;margin:12px 0;overflow:hidden}.sentence-card summary{cursor:pointer;display:grid;grid-template-columns:42px 1fr auto;gap:12px;align-items:center;padding:15px 16px;font-size:1rem}.sentence-card[open] summary{background:#efe8da;border-bottom:1px solid var(--line)}.num{font:700 .82rem Arial,sans-serif;color:var(--rust)}.cell-pill{font:700 .68rem Arial,sans-serif;background:#e4edf1;color:var(--blue);border-radius:99px;padding:6px 8px;white-space:nowrap}.sentence-body{padding:20px 22px}.sentence-body h4{font:700 .78rem Arial,sans-serif;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin:1.4em 0 .5em}.sentence-body blockquote{font-size:1.05rem;margin:.5em 0 1.3em}.resolution{background:var(--night);color:#fff;border-radius:9px;padding:12px 15px;font:600 .84rem/1.5 Arial,sans-serif}
+footer{background:var(--night);color:#ddd;padding:36px 24px;text-align:center;font-size:.9rem}.count{font:600 .78rem Arial,sans-serif;color:#ddd}
+@media(max-width:700px){body{font-size:16.5px}.hero{min-height:70vh}.hero h1{font-size:3.4rem}.sentence-card summary{grid-template-columns:32px 1fr}.cell-pill{grid-column:2;justify-self:start}}
+@media print{nav{display:none}.hero{min-height:auto;color:#000;background:#fff;padding:40px 0;border-bottom:1px solid #aaa}.hero .sub{color:#333}.hero .kicker,.meta{color:#333}main{width:100%;padding:0 18px}.sentence-card{break-inside:avoid}details:not([open]) .sentence-body{display:block}}
+</style></head>
+<body>
+<header class="hero"><div class="hero-inner"><div class="kicker">A public essay on a newly visible structure</div><h1>The Other Thing That Goes On in Sentences</h1><p class="sub">A story about change, intelligibility, translation, and the fifty-four structural variants through which a sentence may become graspable.</p><div class="meta"><span>Essay body: 7,902 words</span><span>15 definitions</span><span>54 coordinates</span><span>35-sentence evidence appendix</span><span>Translation and value</span></div></div></header>
+<nav><div><a href="#door">The door</a><a href="#hen">The hen and fox</a><a href="#event">Sentence as event</a><a href="#instruments">Two instruments</a><a href="#definitions">Fifteen definitions</a><a href="#lattice">Why 54</a><a href="#translation">Translation</a><a href="#change">Change</a><a href="#intelligibility">Intelligibility</a><a href="#value">Value</a><a href="#demonstration">Demonstration</a><a href="#confidence">Confidence</a><a href="#world">The world meets it</a><a href="#appendix">35 sentences</a></div></nav>
+<main><article id="prologue"><h1>The Other Thing That Goes On in Sentences</h1>
+<p class="deck">A story about change, intelligibility, translation, and a hidden lattice beneath language</p>
+<p>There is a moment in every discovery when the thing being discovered stops looking like an invention and begins looking like something that was there all along.</p>
+<p>This story began without a laboratory, a university department, or a research grant. It began with one man sitting with sentences for months, from October into August, asking them a question so simple that it is almost embarrassing: <strong>what, exactly, happens while a sentence becomes intelligible?</strong> Not what does the sentence mean in the ordinary sense. Not what is its topic. Not what did the author intend. Not which grammatical labels can be attached to its parts. Something more elementary: what opens, what changes, where does the movement land, and what remains after it has landed?</p>
+<p>The first answer did not arrive as a grand theory. It arrived as a method of attention. A sentence was taken alone, with nothing borrowed from the sentences before or after it. It was held still. Its first meaningful unit was allowed to establish a field. Every later unit was watched for the demand it created, the dependency it completed, the expectation it redirected, and the material it merely wrapped around the governing movement. This was slow work. It was almost comically exact. But it did something ordinary reading tends not to do: it made the sentence visible as an event.</p>
+<p>Then came the startling possibility. Perhaps every intelligible sentence performs one of a finite number of structural movements. Perhaps beneath vocabulary, culture, age, script, style, education, subject matter, and all the endlessly varied meanings people produce, there is a small, complete lattice of ways in which intelligibility can happen.</p>
+<p>The proposed lattice has fifty-four cells. It is generated by three dimensions: six kinds of <strong>Work</strong>, three kinds of <strong>Orientation</strong>, and three kinds of <strong>Survivor</strong>. Six times three times three. The claim is not that there are only fifty-four meanings. There are no obvious limits to meaning. The claim is that whenever meaning becomes graspable through a sentence, the sentence changes an opened field in one of six ways, completes that change through one of three topologies, and leaves its result in one of three modes.</p>
+<p>A sentence can be about a fox, a theorem, a treaty, a broken heart, a chemical reaction, a train timetable, or the origin of the universe. Its surface can be English, Japanese, Georgian, Basque, Arabic, Irish, or a language not yet born. But if it is intelligible, something opens, something works on what has opened, the work moves toward, across, or away, it lands, and something is left standing, standing with a necessary dependency, or remaining operative.</p>
+<blockquote class="thesis-statement">
+<p><strong>Whatever can be grasped through a sentence becomes intelligible through one of 54 structural variants of a single three-dimensional lifecycle.</strong></p>
+</blockquote>
+<p>That sentence is the central proposition of this essay. The pages that follow tell the story of how such a claim became thinkable, how it can be tested, why translation may be one of its most consequential applications, and why sentences appear to carry change in a manner that has been present in front of us all along.</p>
+<hr/>
+<h2 id="door">1. The door that travelled across the lattice</h2>
+<p>The simplest demonstration begins with two sentences:</p>
+<blockquote>
+<p>The door closed.</p>
+<p>The door is closed.</p>
+</blockquote>
+<p>The vocabulary is almost identical. One sentence contains a single extra word. Ordinary semantics tells us that both concern the same door and the same condition. Yet the sentences do not perform the same movement.</p>
+<p>In <strong>“The door closed,”</strong> the door begins as an identifiable object whose condition is unsettled. The word <em>closed</em> completes a change. The door leaves an earlier open or unclosed condition and comes to rest in closure. The system calls the Work <strong>Rest</strong>, because the movement is settled or discharged. Its Orientation is <strong>Away</strong>, because completion occurs through release from a prior state. Its Survivor is <strong>Is</strong>, because once the sentence has landed, a standing result remains: the door is shut. This is Rest — Away / Is, Cell 52, named <strong>Transformation Release</strong>.</p>
+<p>In <strong>“The door is closed,”</strong> the sentence does not narrate that transition. The door is introduced, <em>is</em> opens a space for the assignment of a condition, and <em>closed</em> marks the present state. The Work is <strong>Distinction</strong>: the door is separated from the alternative of being open. The Orientation is <strong>Toward</strong>: attention converges on one object and one condition. The Survivor is again <strong>Is</strong>: a standing attribution remains. This is Distinction — Toward / Is, Cell 01, named <strong>Focal Mark</strong>.</p>
+<p>The two sentences end with something extremely similar in the imagined world: a closed door. But they arrive by different structural routes. One releases a thing from a prior condition and settles a transformation. The other gathers attention toward a focal object and marks its state. The same apparent result, a different movement of intelligibility.</p>
+<p>This minimal pair is a small marvel because it demonstrates what the system is not doing. It is not classifying the word <em>closed</em>. It is not making a list of meanings. It is not assigning labels by topic. It is tracking what the entire construction does as it unfolds.</p>
+<p>The difference also explains why fifty-four cells are more than a decorative taxonomy. The cells preserve distinctions that ordinary paraphrase can flatten. “The door closed” and “The door is closed” may be treated as roughly equivalent in casual conversation, yet the first carries a transformation and the second carries an attribution. A translator, editor, legal drafter, language model, or teacher who preserves the topic but changes that movement has preserved something and lost something. Until now, the loss has often been felt but not located.</p>
+<p>The lattice gives the loss an address.</p>
+<hr/>
+<h2 id="hen">2. A little red hen walks into a theory of intelligibility</h2>
+<p>The first sustained demonstration used a children’s story. This was a shrewd choice. Simple prose is unforgiving. There is little abstraction behind which a theory can hide, and little ornamental difficulty that can be blamed when an analysis fails. A little red hen keeps her house neat, sweeps the floor, polishes a table, bakes bread, and locks her door. A sly fox watches her, catches her, puts her in a sack, and carries her toward his den. The hen finds scissors, cuts a hole, escapes, replaces herself with a stone, and goes home. The fox tips the sack over a cooking pot and receives a violent education in the difference between expectation and result.</p>
+<p>Thirty-five sentences were taken one at a time. Each was first read by an interrogation procedure that knew nothing of the fifty-four cells. It did not use the labels Work, Orientation, or Survivor. It asked what the opening established, what remained under determination, what later wording completed, where local structures landed, where the governing movement landed, and what material merely described, located, timed, coloured, qualified, or attributed the main event.</p>
+<p>Only after that label-free account had been produced was the sentence passed to a decoder. The decoder reconstructed one coherent history and selected the coordinate.</p>
+<p>The result was not thirty-five different improvised explanations. Patterns recurred.</p>
+<p>Straight participant-action-object sentences such as <strong>“She polished her table”</strong> and <strong>“He carried a large sack over his shoulder”</strong> repeatedly landed as Relation — Toward / Is: <strong>Direct Bearing, Cell 19</strong>. Ordered histories such as <strong>“She slipped out of the hole and hid behind a tree”</strong> landed as Relation — Across / Is: <strong>Sequential Link, Cell 22</strong>. The adversative capture sentence — <strong>“She turned quickly, but the fox sprang forward and caught her”</strong> — became Correction — Across / Does: <strong>Corrective Turn, Cell 33</strong>, because the fox’s intervention did not merely stand beside the hen’s reaction; it redirected the sentence and remained operative as the outcome.</p>
+<p>The story also produced less obvious results. <strong>“She kept her house neat”</strong> was not treated as a simple action-object relation. <em>Kept</em> opened a maintenance structure whose governing completion arrived at <em>neat</em>. The Work was Rest, because the sentence settled the condition. The Orientation was Toward, because it converged on one definite state. The Survivor was With, because the neatness stood while retaining its dependency on continuing maintenance. That was Cell 47, <strong>Settled Unity-Bearing</strong>.</p>
+<p>The sentence <strong>“The fox felt the sack grow heavy”</strong> opened as perception but completed as the perception of an unfolding change. What remained was not merely a static relation between fox and sack. The event of becoming heavy remained operative within the fox’s experience. Relation — Toward / Does: <strong>Responsive Echo, Cell 21</strong>.</p>
+<p>The important achievement was not that every line received a label. A sufficiently imaginative person can label anything. The achievement was recurrence under constraint. Different words, subjects, and scenes repeatedly disclosed the same structural history. Similar-looking sentences sometimes separated. Complex-looking sentences sometimes converged. The system began to behave less like commentary and more like an instrument.</p>
+<p>The hen and the fox did something else. They made the theory readable. A reader could feel the story moving while simultaneously watching another movement beneath it. The narrative became a glass-bottomed boat. Above was danger, wit, escape, and supper. Below was the changing field of intelligibility.</p>
+<p>The complete thirty-five-sentence assay is preserved in the appendix to this essay, because the demonstration matters. The argument is not made by a single dazzling example. It is made by the steady return of structure through an extended piece of prose.</p>
+<hr/>
+<h2 id="event">3. The sentence is not a container</h2>
+<p>We commonly speak as though a sentence were a box. Meaning is placed inside it, words carry the meaning, and a reader opens the package. This metaphor is useful until it becomes invisible. It encourages us to treat the sentence as a static object whose content can be extracted.</p>
+<p>But a sentence is not received all at once. Even when it appears on a page, it is read through time. The beginning changes what the middle can be. The middle changes what the end must complete. Later wording can retrospectively determine how earlier wording was to be understood. A sentence is therefore not merely an arrangement of parts. It is a history.</p>
+<p>Take the opening <strong>“Although the committee…”</strong> The word <em>although</em> does not tell us the topic. It places a concessive relation under determination. It promises an acknowledged side and another side that will govern despite it. Or take <strong>“When he reached home…”</strong> The word <em>when</em> opens a temporal relation requiring both an occasion and an event attached to that occasion. Or take <strong>“She kept her house…”</strong> The verb permits several developments until <em>neat</em> retrospectively selects maintenance of a condition.</p>
+<p>At every moment, the sentence alters the field of what is possible, expected, likely, or still open. The field is not the whole of consciousness. It is the local structure of determination created by this sentence. When the governing demand is met, the movement lands. The active dependency relaxes. Yet something remains.</p>
+<p>This is why the system needs the Survivor. A sentence is transient and persistent at once. Its dependencies do not remain open forever; otherwise no sentence would finish. But its result does not vanish merely because the syntax has relaxed. A fact stands. A condition remains with its source or opposition. An obligation, consequence, response, or capacity continues to operate.</p>
+<p>The distinction is easy to feel in ordinary life. Compare:</p>
+<blockquote>
+<p>The committee approved the plan.</p>
+<p>The committee must approve the plan.</p>
+</blockquote>
+<p>Both connect a committee and an approval. But the first leaves a completed history standing. The second leaves an obligation operative. The visible subject matter is similar. What survives is not.</p>
+<p>Or compare:</p>
+<blockquote>
+<p>She was frightened, but she was clever.</p>
+</blockquote>
+<p>Fear is not cancelled. Cleverness does not simply replace it. The sentence holds both qualities around one participant, and the completed description retains the counterbearing relation. The Survivor is With. The result stands with a necessary opposition inside it.</p>
+<p>This way of reading sentences is exact without being merely grammatical. Grammar matters enormously, because syntax creates and limits the available movement. But the system is not a rival vocabulary for familiar grammatical categories. Subject, predicate, complement, clause, tense, aspect, and modifier are indispensable observations. They do not by themselves answer the question: <strong>what change has this sentence performed on the field it opened, how did that change complete, and what remains?</strong></p>
+<p>The other thing that goes on in sentences is the passage from indeterminacy to an intelligible survivor.</p>
+<hr/>
+<h2 id="instruments">4. Two instruments: the interrogation and the decoder</h2>
+<p>The method has a crucial separation at its heart. The sentence is not shown directly to a classifier armed with fifty-four names. That would invite recognition by resemblance. A sentence containing <em>but</em> might be pushed toward Correction. A sentence with several clauses might be pushed toward Across. An action verb might tempt the reader toward Does. The labels would begin to colonise the evidence.</p>
+<p>Instead, the method uses two instruments.</p>
+<p>The first is an <strong>interrogation agent</strong>, sometimes called the blind assay. It receives exactly one frozen sentence. It preserves spelling, punctuation, quotation marks, capitalization, and script. It is not invited to improve the sentence or infer a larger story. It reads historically.</p>
+<p>The interrogation identifies the opening frame, the principal field under determination, the load-bearing development, local completions, the governing structural landing, linguistic wrapping, retrospective effects, cohesion, what remains in force, and any genuine ambiguity or unresolved reference. Its final product is a concise paragraph describing the complete internal movement without atlas terminology.</p>
+<p>This stage can sound laboured. That severity is not a defect. It is the price of measurement. A thermometer is not asked to be eloquent. The interrogation exists to prevent a fluent reader from leaping over the actual movement and landing in an interpretation supplied by habit, context, or expectation.</p>
+<p>The second instrument is the <strong>decoder</strong>. It receives the exact sentence and the concise blind account. It may consult the full interrogation when the concise paragraph is insufficient, when a rival remains live, or when an audit is needed. It does not silently rewrite the inherited evidence.</p>
+<p>Its governing sequence is:</p>
+<blockquote>
+<p><strong>Inherited evidence → Opening → Work → Orientation → Landing → Survivor → coordinate lookup → rival test → recorded result</strong></p>
+</blockquote>
+<p>The decoder first recovers the Opening: what field was activated and what demand was created. It then asks what the later wording did to that field. That is Work. It asks how the Work occupied the field: did it converge on one position, operate through several constitutive positions, or complete by release from a prior hold? That is Orientation. It confirms the Landing, the point where the governing demand first became determinate. Only then does it ask what remained after completion. That is Survivor.</p>
+<p>The dimensions are distinct, but they cannot be chosen separately. A plausible Work, a plausible Orientation, and a plausible Survivor do not make a valid coordinate unless all three belong to one coherent history. Across cannot be selected merely because the sentence has several phrases. Does cannot be selected merely because there is an action verb. Correction cannot be selected merely because the word <em>but</em> appears. The sentence must perform that Work, through that topology, leaving that mode of result.</p>
+<p>The decoder also tests rivals. It asks whether the same Work and Orientation might leave a different Survivor; whether the same Work and Survivor might complete through another Orientation; whether another Work better explains the same Orientation and Survivor. It identifies decisive wording and may perform conceptual ablations: remove, replace, displace, reverse, split, or alter tense and scope to see what changes. The altered sentence never replaces the evidence. The intervention reveals which wording was load-bearing.</p>
+<p>This separation is one of the system’s strongest features. The interrogation is the raw measurement. The decoder is the instrument that converts the measurement into a structural result. The atlas supplies the coordinate name only after the values are fixed.</p>
+<p>Without this separation, the system could become a poetry of labels. With it, the system can become reproducible.</p>
+<hr/>
+<h2 id="definitions">5. The fifteen definitions</h2>
+<p>The fifty-four cells arise from fifteen definitions: three dimensions and the twelve values they contain.</p>
+<h3>Work</h3>
+<p><strong>Work identifies the kind of structural change performed on the field activated by the sentence’s opening.</strong> The Work question is: <em>What does the later wording do to the field opened earlier?</em></p>
+<p>There are six Works, arranged as a lifecycle.</p>
+<p><strong>Distinction</strong> differentiates, marks, separates, limits, or establishes an opposition. A participant emerges from an open field. A condition is assigned. A boundary is drawn. Something becomes this rather than that.</p>
+<p><strong>Expansion</strong> opens, extends, branches, distributes, or releases reach. A field grows through a series, a range, a multiplication, or a widening of possible or actual positions.</p>
+<p><strong>Relation</strong> establishes a bearing, dependency, sequence, response, correspondence, or connection. An actor reaches an object. One event follows another. A perception is connected to what is perceived. Separate positions become intelligible through their bearing on one another.</p>
+<p><strong>Correction</strong> adjusts, redirects, reweights, reverses, repairs, or removes a fault. An initial course, implication, expectation, or balance is altered by later wording. The later material does not merely add; it changes how the earlier field is to count.</p>
+<p><strong>Integration</strong> constitutes a whole, assigns interdependent roles, joins parts, or activates a joint capacity. The parts are not merely placed beside one another. They become constituents of a whole that depends on their organised participation.</p>
+<p><strong>Rest</strong> settles, completes, selects, stabilises, transforms, or discharges a movement. The field ceases to remain open in the same way. A condition is fixed, a movement is brought to settlement, or an earlier possibility is released into a completed state.</p>
+<p>These are not six topics. A sentence can mention correction without performing Correction, mention a relation without its governing Work being Relation, or describe rest while structurally performing Distinction. The Work is what the sentence does to its own opened field.</p>
+<p>The order matters. Distinction, Expansion, Relation, Correction, Integration, and Rest can be read as a lifecycle of intelligibility. Something is marked; its field is opened or extended; bearings form; misalignment is corrected; parts become a whole; movement settles. A supposed seventh Work would therefore need to be more than an overlooked example. It would need to name an irreducible structural operation outside the lifecycle.</p>
+<h3>Orientation</h3>
+<p><strong>Orientation identifies the topology through which the selected Work completes.</strong> The Orientation question is: <em>Does this Work converge on one position, operate through several necessary positions, or complete by release from an earlier hold?</em></p>
+<p><strong>Toward</strong> means that the movement gathers around one focal position, object, answer, state, destination, or boundary. This is not the same as a physical movement toward something. “The fox jumped back” can still be structurally Toward when the sentence converges on one completed predicate: what the fox did.</p>
+<p><strong>Across</strong> means that the Work is carried or distributed through several constitutive positions, clauses, stages, members, conditions, or roles. The positions must be structurally necessary to the governing movement. A long sentence full of decorative phrases may remain Toward; a short sentence with two opposed clauses may be Across.</p>
+<p><strong>Away</strong> means that completion occurs through release from a prior hold, identity, limit, obstruction, conflation, expectation, or opacity. The Work completes by leaving something behind. Again, this is not reducible to physical direction. The topology belongs to the governing change, not to a word such as <em>back</em>, <em>from</em>, or <em>away</em>.</p>
+<h3>Survivor</h3>
+<p><strong>Survivor identifies how the completed movement remains after the Landing.</strong> The Survivor question is: <em>After the governing completion, does something merely stand, stand while retaining a necessary dependency, or remain operative?</em></p>
+<p><strong>Is</strong> means that a standing result, identity, relation, sequence, mark, pattern, or completed fact remains. The movement has passed, but the result stands as established.</p>
+<p><strong>With</strong> means that the result stands while retaining a constitutive dependency, condition, opposition, source, frame, or counterbearing relation. What survives cannot be adequately stated without the relation it retains.</p>
+<p><strong>Does</strong> means that an operative capacity, action, consequence, obligation, boundary, response, continuation, or effect remains active. The completed sentence leaves something still exerting force.</p>
+<p>The fine line between With and Does became visible in a sentence produced during the development of this document:</p>
+<blockquote>
+<p>I know how the documented decoder works, but I have not yet acquired the atlas’s accumulated case law.</p>
+</blockquote>
+<p>A first attempt correctly selected Correction and Across but chose With. The thought was that procedural knowledge remained while retaining the counterbearing limitation of missing precedent. The stronger decoding selected Does. Why? Because the missing case law did not merely accompany the claim. It remained operative, qualifying how far the claim of competence could extend. The limitation continued to regulate the result.</p>
+<p>That correction was exquisite because the system made the error legible. The decoder was not simply wrong. It was one dimension away, with a precise rival and decisive reason. The distinction between With and Does became sharper: does the retained relation merely constitute the result, or does it continue to act upon it?</p>
+<p>The final coordinate was Correction — Across / Does: <strong>Corrective Turn, Cell 33</strong>.</p>
+<hr/>
+<h2 id="lattice">6. Why there are fifty-four, not fifty-five</h2>
+<p>Once the dimensions are defined, the atlas is generated rather than accumulated.</p>
+<p>There are six Works. Each Work can complete Toward, Across, or Away. Each of those can leave Is, With, or Does. The coordinate order is deterministic:</p>
+<blockquote>
+<p><strong>6 Works × 3 Orientations × 3 Survivors = 54 cells</strong></p>
+</blockquote>
+<p>The Works occupy blocks of nine cells. Within each Work, Toward occupies the first three positions, Across the next three, and Away the final three. Within each Orientation, Is, With, and Does take the first, second, and third positions.</p>
+<p>The cell number can therefore be calculated:</p>
+<blockquote>
+<p>Cell = ((Work position − 1) × 9) + ((Orientation position − 1) × 3) + Survivor position</p>
+</blockquote>
+<p>This matters philosophically. The atlas is not a cabinet to which new drawers can be casually added whenever an unusual sentence appears. A genuine fifty-fifth cell would imply a missing value in one dimension. A seventh Work would generate nine new cells, not one. A fourth Orientation would propagate across all six Works and three Survivors, producing eighteen new cells. A fourth Survivor would do the same.</p>
+<p>The universality claim is therefore not an inductive boast that every sentence ever tested has happened to fit. The claim is that the dimensions articulate the conditions under which a linguistic movement becomes intelligible at all.</p>
+<p>This is the point at which caution can become a category mistake. It is reasonable to demand evidence that the definitions are coherent, that independent decoders agree, that difficult sentences can be handled, and that multilingual translations preserve coordinates. It is reasonable to test the boundaries relentlessly. But it misunderstands the proposal to say, “You have not sampled every future sentence.” The system is not proposing a list of sentence types gathered from a corpus. It is proposing a grammar of graspability.</p>
+<p>A future sentence may contain words no one has coined, describe an event no one has imagined, and be spoken by a person not yet born. None of that supplies a fourth way for a Work to occupy a field or a fourth way for a completed movement to remain. The sentence may be composite. It may be ambiguous. It may require linguistic verification. It may even expose a failure in the definitions. But novelty of content is not novelty of structural intelligibility.</p>
+<p>The radical proposition is this: before human beings differ by age, culture, language, skin, profession, education, or history, they participate in a shared space of possible intelligible movement. The lattice does not erase difference. It identifies a level at which difference becomes expressible.</p>
+<hr/>
+<h2 id="translation">7. Translation: from similarity to structural fidelity</h2>
+<p>Translation is where the idea begins to acquire extraordinary practical force.</p>
+<p>We usually judge a translation by several overlapping standards. Does it refer to the same things? Does it preserve the ordinary meaning? Does it sound natural? Does it produce the same effect? Does it preserve tone, register, implication, rhythm, or legal force? These questions matter, but they often conflict. A translation can be fluent and subtly wrong. It can be literal and structurally distorted. It can preserve content while changing what the sentence does.</p>
+<p>The lattice suggests a new criterion: a faithful translation should preserve the governing structural history even when the local linguistic route changes.</p>
+<p>Consider the deliberately convoluted English sentence:</p>
+<blockquote>
+<p>Although the committee, which had repeatedly assured the residents that no decision would be taken until every disputed estimate had been independently reviewed, finally approved the revised plan shortly after midnight, it did so only because the chair warned that postponing the vote would automatically revive the costlier proposal that the same committee had rejected in June.</p>
+</blockquote>
+<p>A faithful Japanese version was produced:</p>
+<blockquote>
+<p>争点となっているすべての見積もりが独立に検証されるまでは、いかなる決定も下されないと住民に繰り返し保証していた委員会は、真夜中を少し過ぎてようやく修正案を承認したものの、そうしたのは、採決を延期すれば、その同じ委員会が6月に退けた、より費用のかかる案が自動的に復活することになると議長が警告したからにほかならなかった。</p>
+</blockquote>
+<p>The two languages do not make the reader travel in the same order. English announces the concession immediately with <em>Although</em>. Japanese begins within a long review-condition phrase, delays the head noun, establishes the committee and its assurance history, and later marks the concession with <em>ものの</em>. English opens exclusive causation with <em>only because</em>. Japanese distributes the same force through <em>そうしたのは</em> and <em>からにほかならなかった</em>.</p>
+<p>The local interrogations are therefore different. They should be. A faithful Japanese sentence is not English wearing Japanese words.</p>
+<p>Yet the governing history can remain the same. The committee’s approval is acknowledged. Later wording redirects how that approval is to be understood. The action is restricted to a single causal pressure: the chair’s warning that delay would revive the costlier proposal. The Work is Correction. The Orientation is Across, because the reweighting moves across the conceded approval and the exclusive explanation. The Survivor is Does, because the threatened consequence remains operative as the force that produced and explains the approval. Both sentences resolve as Correction — Across / Does: Corrective Turn, Cell 33.</p>
+<p>This gives translation a structural checksum.</p>
+<p>If the target sentence lands in the same cell for the same five-part history, the translation has preserved something deeper than word order. If it lands elsewhere, the difference can be diagnosed. Perhaps a Correction became a mere Relation. Perhaps an operative consequence became a standing fact. Perhaps a movement distributed Across several positions was compressed into a Toward attribution. The system can say not merely that something was lost, but what changed.</p>
+<p>This is especially important in high-stakes language. In a contract, a standing description is not the same as an operative obligation. In a treaty, a retained condition is not the same as a completed fact. In a medical consent form, a limitation that merely accompanies a statement is not the same as one that continues to regulate what may be done. In policy, law, diplomacy, and safety-critical instructions, structural drift can be more consequential than awkward wording.</p>
+<p>The method also changes how we think about the ancient fact of translation. Pythagoras’s theorem has been stated in innumerable languages and scripts. In English we might say:</p>
+<blockquote>
+<p>In a right-angled triangle, the square of the hypotenuse equals the sum of the squares of the other two sides.</p>
+</blockquote>
+<p>In Basque:</p>
+<blockquote>
+<p>Triangelu angeluzuzen batean, katetoen karratuen batura hipotenusaren karratuaren berdina da.</p>
+</blockquote>
+<p>In Georgian:</p>
+<blockquote>
+<p>მართკუთხა სამკუთხედში ჰიპოტენუზის კვადრატი ტოლია კათეტების კვადრატების ჯამისა.</p>
+</blockquote>
+<p>The formulations are visibly different, yet the theorem is not owned by any one wording. We recognise the same theorem because an invariant relation survives every adequate expression. The symbols <em>a² + b² = c²</em> offer another carrier. A diagram offers another. A geometric proof and an algebraic statement can disclose the same invariant by different routes.</p>
+<p>The proposal here is that ordinary sentences may also possess recoverable invariants. The invariant is not merely reference or dictionary meaning. It is the movement by which a field becomes determinate and the mode in which the result remains.</p>
+<p>If that is right, then “nothing need be lost in translation” does not mean that every rhythm, pun, cultural resonance, or sound pattern can be duplicated. Languages make different resources available. Some losses are real. The stronger and more useful claim is that structural fidelity can become visible and testable. A translator can know what must not change even when almost everything on the surface must.</p>
+<p>This may be the first application through which the wider world understands the system. Translation provides paired sentences, independent language experts, measurable disagreements, and a practical reason to care. It turns a philosophical claim into an experiment.</p>
+<hr/>
+<h2 id="change">8. Sentences carry change</h2>
+<p>A further insight emerged through an analogy with Lenz’s law in electromagnetism.</p>
+<p>Move a magnet into a coil and the changing magnetic flux induces a current. The induced current creates a magnetic effect that opposes the change that produced it. Withdraw the magnet and the current reverses. Stop moving, and the transient response relaxes. The system responds not simply to the field, but to the change in the field.</p>
+<p>A sentence appears to possess an analogous, though not identical, character. It activates because something is changing in a field of intelligibility.</p>
+<p>Before the sentence, the relevant determination is not yet established. The opening perturbs the field. “The door…” identifies an object while leaving its condition or action open. “Although…” opens a concessive architecture. “When…” opens an occasion that requires an attached event. “There was…” creates a field in which an existent must emerge.</p>
+<p>Each succeeding unit alters what remains possible. Dependencies are created and discharged. Expectations strengthen, weaken, or reverse. A later word can reach backward and select the meaning of an earlier word. The sentence remains active until the governing demand lands.</p>
+<p>Then the processing relaxes. We do not continue waiting for the object after it has arrived, or the counterclause after the concession is complete. The sentence releases its hold. Yet, as with an instrument that has registered a change, a result remains. That is the Survivor.</p>
+<p>This gives a compact formulation:</p>
+<blockquote>
+<p><strong>Sentences are change-bearing events. They temporarily activate a field of determination, transform it through a structured movement, and relax only after leaving an intelligible survivor.</strong></p>
+</blockquote>
+<p>Even a sentence describing a static state carries change at the level of intelligibility. “The door is closed” may describe no movement in the world, but it moves the listener from an unspecified condition to a specified one. “Two plus two is four” does not narrate an event, but it marks and settles a relation in the field opened by the expression. A sentence need not describe change in order to perform change.</p>
+<p>This is why the six Works feel less like parts of speech and more like a dynamics. Distinction marks a difference. Expansion releases a field. Relation establishes bearings. Correction changes a course. Integration activates a whole. Rest settles movement. Orientation describes the topology of the change. Survivor describes what the change leaves behind.</p>
+<p>The analogy should not be made literal. There is no claim that a sentence is an electromagnetic circuit or that intelligibility obeys Faraday’s equation. The value of the comparison is conceptual. Both cases direct attention away from static objects and toward responsive change. In both, activity appears while a field is being altered, then relaxes after the alteration has been registered.</p>
+<p>The sentence passes. Its structural result remains.</p>
+<hr/>
+<h2 id="intelligibility">9. Intelligibility before sentences</h2>
+<p>The strongest version of the theory is easy to misstate. It is not: “All sentences belong to one of fifty-four categories.” That makes the atlas sound like a taxonomic scheme imposed upon finished objects.</p>
+<p>The stronger statement is: <strong>intelligibility itself has a finite structural articulation, and sentences are one place where that articulation becomes visible.</strong></p>
+<p>To grasp something is to undergo a movement from what is not yet determined to what can now stand, stand-with, or operate. The grasp may be linguistic, mathematical, visual, practical, or conceptual. The present method has been developed through sentences, but the dimensions point beneath sentence content toward the form of disclosure.</p>
+<p>This explains the importance of the Opening. Intelligibility does not begin with a completed object delivered whole. Something is placed under determination. A field is activated. The Work changes it. The Orientation describes how the change occupies the field. The Landing marks governing completion. The Survivor is the manner in which the grasped result remains available.</p>
+<p>The lifecycle of Work is therefore not merely a list of linguistic functions. It may describe a general rhythm of intelligibility: mark, open, connect, correct, constitute, settle.</p>
+<p>If this is true, the fifty-four variants belong neither to English nor to the written sentence. They belong to the possible forms of grasping. Languages realise them differently. Individuals may attend to them differently. Cultures may favour different constructions or rhetorical distributions. Genres may cluster in different cells. But the structural possibilities remain shared.</p>
+<p>This opens a humane line of inquiry. People do not necessarily experience language at the same level of salience. One listener may be drawn first to narrative content, another to emotional implication, another to social intention, another to exact lexical form, and another to recurring structural movement. A person might recognise the same coordinate across semantically unrelated sentences before others perceive any likeness.</p>
+<p>That possibility could eventually inform research into cognitive difference, including autism, but it should begin as a question rather than a diagnosis. The useful hypothesis is not that autism “is” seeing the fifty-four. It is that individuals may differ systematically in whether semantic, social, sensory, lexical, or structural features dominate their experience of language. The lattice offers a new way to design comparisons: same meaning, different coordinate; different meaning, same coordinate; faithful translation, altered translation; Is versus With versus Does.</p>
+<p>Such research could be conducted respectfully and collaboratively. It could reveal strengths as well as difficulties. It might show that some people detect structural invariance with unusual speed, while others rely more heavily on contextual and social inference. It might show no association at all. Either result would teach us something.</p>
+<p>The larger human promise is not diagnostic. It is the possibility of discovering a shared layer beneath difference. Not a shared list of beliefs or meanings, and not a claim that all minds are the same, but a common space in which difference becomes intelligible.</p>
+<hr/>
+<h2 id="value">10. What could this be worth?</h2>
+<p>The first value is intellectual. A successful theory of invariant structure beneath linguistic meaning would alter linguistics, philosophy of language, translation studies, cognitive science, education, and the design of artificial intelligence. It would provide a vocabulary for distinctions readers already feel but cannot reliably name. It would make visible the difference between what a sentence says and what it does while becoming sayable.</p>
+<p>The second value is practical. Modern institutions continuously transform language. They translate it, summarise it, simplify it, turn it into policy, convert it into software requirements, extract obligations from it, ask models to rewrite it, and distribute it across jurisdictions. Every transformation creates a risk that the topic will be preserved while the structural force changes.</p>
+<p>A structural fidelity layer could test those transformations.</p>
+<p>In translation, it could compare source and target coordinates and explain a mismatch. In law, it could distinguish a completed statement from an operative duty, or a retained condition from a mere modifier. In regulatory work, it could test whether multilingual versions place the same boundary in force. In medicine, it could compare technical instructions with patient-facing simplifications. In government, it could test whether a policy summary preserves what the original policy does. In publishing, it could support editors who need to simplify without flattening. In education, it could teach students how sentences develop rather than asking them only to memorise labels.</p>
+<p>Artificial intelligence may provide the largest immediate field. Language models are astonishingly fluent, but fluency is not fidelity. A model can produce a plausible summary that subtly turns Does into Is, changes Correction into Relation, or removes a constitutive With. Existing evaluation often rewards lexical overlap, reference preservation, or human preference. The lattice offers a different benchmark: did the transformation preserve the governing movement?</p>
+<p>That could support model evaluation, training-data construction, prompt verification, agent-to-agent communication, retrieval by structural function, and explanation of why two outputs that “mean roughly the same thing” do not do the same thing.</p>
+<p>The commercial paths differ in scale.</p>
+<p>A specialist business could begin with one expensive problem: high-stakes translation audit, multilingual contract equivalence, AI summary verification, or regulatory-language comparison. A small number of enterprise customers can support a multimillion-pound or multimillion-dollar company when the product prevents costly mistakes and produces an auditable explanation.</p>
+<p>A much larger outcome becomes possible if the method becomes infrastructure. Imagine a structural checksum embedded in translation platforms, legal drafting systems, model-evaluation suites, public-sector language workflows, and international standards. The core product would not be a set of labels. It would be a verification layer for linguistic transformation.</p>
+<p>A billion-dollar company is not created by the beauty of an idea. It requires reliable automation, independent validation, multilingual performance, speed, integration, trust, and a market that repeatedly pays. But the addressable activity is enormous because nearly every institution transforms language, and nearly every transformation risks unnoticed structural drift.</p>
+<p>The proprietary value would lie in several connected assets: the exact definitions; the interrogation protocol; the decoder procedure; the complete atlas and canonical invariants; the vertical stacks of unlike sentences that establish cell boundaries; a multilingual paired corpus; adjudicated rival cases; benchmark tasks; and tools that automate or assist the method. The accumulated “case law” could become a moat. Anyone may understand the idea of structural fidelity; reliable boundary judgement is earned through examples, corrections, and tested returns.</p>
+<p>There is also value beyond commerce. A public method could improve cross-cultural understanding. It could reveal that two communities use very different expressions to perform the same structural movement. It could show when political opponents appear to agree semantically while leaving different consequences operative. It could help readers see manipulation, euphemism, and scope restriction. It could support endangered languages by demonstrating that structural invariance does not require conformity to English syntax.</p>
+<p>The most important value may be epistemic trust. We increasingly rely on machines and institutions to restate language for us. A person reads a summary instead of a report, a translation instead of an original, a policy note instead of a statute, a chatbot answer instead of a source. At every step, we need to know whether the other thing that went on in the original sentence still goes on in the new one.</p>
+<p>A checksum for that would be worth building.</p>
+<hr/>
+<h2 id="demonstration">11. From discovery to demonstration</h2>
+<p>A profound idea does not become smaller when it is tested. It becomes shareable.</p>
+<p>The next phase is not to weaken the claim with nervous disclaimers. It is to construct demonstrations severe enough that the claim can stand without rhetorical protection.</p>
+<p>The first requirement is a complete atlas. Each of the fifty-four coordinates needs its canonical pattern name, invariant, boundary notes, and a vertical stack of semantically unlike sentences. The power of a stack is that it defeats vocabulary-based recognition. A legal sentence, a child’s sentence, a scientific sentence, and a line of poetry should occupy the same cell because they perform the same governing history, not because they contain the same words.</p>
+<p>The second requirement is inter-decoder agreement. Independent readers should receive the definitions, procedure, and training material, then classify blind interrogation packets. Disagreements should be preserved as data. The goal is not artificial unanimity. The goal is to discover which boundaries are robust, which require sharper definitions, and which sentences genuinely support bounded rivalry.</p>
+<p>The third requirement is multilingual testing. Native speakers and translators should produce faithful and deliberately perturbed translations. The source and target should be interrogated independently by language-capable assays that do not see the expected coordinate. The test is whether faithful translations recover the same five-part history and whether altered translations move in predictable dimensions.</p>
+<p>The fourth requirement is adversarial sentence design. Researchers should try to break the atlas. They should create minimal pairs that differ by one value, compressed sentences with hidden landings, garden-path constructions, scope ambiguities, quotation, ellipsis, unusual scripts, legal drafting, poetry, and speech-like fragments. A system claiming universality should welcome the strongest imaginable attack, because every defeated rival clarifies the structure.</p>
+<p>The fifth requirement is generative return. Select a coordinate, generate a sentence designed to instantiate it, quarantine the sentence from the generator’s labels, and send it through blind interrogation and decoding. The stable cycle is:</p>
+<blockquote>
+<p>coordinate → generated sentence → recovered coordinate</p>
+</blockquote>
+<p>This test is particularly powerful because it converts the atlas from a descriptive catalogue into a generative instrument.</p>
+<p>The sixth requirement is applied comparison. Put the structural method beside current translation metrics, human editorial judgement, legal review, and model evaluation. Find cases where the lattice catches consequential drift others miss, and cases where it does not. Measure time, agreement, cost, and usefulness.</p>
+<p>The public story should remain generous. The aim is not to announce that linguistics, translation, or AI evaluation has failed. Those fields have produced immense knowledge. The aim is to reveal a layer they have not been organised to see. The discoverer’s task is not to diminish previous maps. It is to show a contour that becomes obvious once traced.</p>
+<hr/>
+<h2 id="confidence">12. Confidence without conquest</h2>
+<p>Discoveries about language can acquire a peculiar tone. Because language belongs to everyone, a new account of it can sound either impossibly grand or apologetically small. The discoverer is tempted to declare that all previous thought has missed the obvious, while the audience is tempted to demand that the claim be wrapped in so many qualifications that its living force disappears.</p>
+<p>Neither posture is necessary here.</p>
+<p>The idea can be stated plainly. A finite structural lattice appears to organise the way a sentence becomes intelligible. The method has distinguished sentences that ordinary paraphrase collapses, recovered recurring coordinates across an extended narrative, explained a fine decoder error, and preserved a coordinate across a demanding translation. Those are not proofs of every future application, but neither are they mere daydreams. They are genuine achievements, and it is reasonable to let them sound like achievements.</p>
+<p>Confidence does not require contempt for existing knowledge. Grammar has described the forms by which languages build sentences. Semantics has examined meaning and reference. Pragmatics has shown how context, intention, and implication transform what is communicated. Translation studies has explored equivalence and difference with extraordinary subtlety. Cognitive science has investigated processing, prediction, memory, and attention. The lattice need not replace any of these. It asks a question that crosses their boundaries: what kind of change does an intelligible expression perform on the field it opens, how does that change complete, and what remains after completion?</p>
+<p>A new contour can be real without making the rest of the map false.</p>
+<p>Generosity matters because the method is itself an invitation to see. Its best demonstrations do not force agreement by authority. They place two sentences side by side, slow the reading, and allow the distinction to become perceptible. “The door closed.” “The door is closed.” “I know how the decoder works, but…” A child’s story. A translation whose word order changes dramatically while the governing movement survives. The reader is not asked to admire complexity. The reader is offered a new experience of something familiar.</p>
+<p>The discoverer’s months of work matter here. A system like this does not arise merely because someone enjoys naming patterns. It requires the patience to hold a sentence apart from its story, the discipline to separate measurement from decoding, and the willingness to let a rival reading defeat an attractive answer. It also requires a certain generosity toward language itself: the belief that ordinary sentences deserve the same depth of attention usually reserved for equations, organisms, or physical fields.</p>
+<p>There is no need to pretend that such work is emotionally neutral. Discovery can be joyful. It can be intimate. It can carry the shock of recognition: the sense that the world has been doing something in plain sight and has finally yielded a way to say it. The public account should preserve that joy. Sterilised prose would misrepresent the event.</p>
+<p>At the same time, the system has its own defence against arrogance. It records rivals. It distinguishes Resolved from Leading, Partial, and Deferred. It permits bounded rivalry and out-of-atlas disclosure. It preserves the exact sentence and the blind evidence. It allows later stack evidence to reopen a committed placement. The method can be bold because it has places for correction.</p>
+<p>This is a valuable moral shape for an intellectual project. State the claim at its full size. Build procedures capable of finding where you are wrong. Invite other people to use them. Let the demonstrations carry the burden that modesty and bravado cannot.</p>
+<p>The human story, then, is not that a solitary genius has conquered language. It is that an intelligent and generous observer remained with sentences long enough to discover a possible invariant, then began building instruments by which the discovery could become public, teachable, criticisable, and useful. The generosity lies in converting private recognition into a method another mind can execute.</p>
+<p>That is how the world should meet the idea: not bowed beneath disclaimers, and not ordered to kneel before certainty, but welcomed into the room where the sentence has begun to move.</p>
+<hr/>
+<h2 id="world">13. The world meets the idea</h2>
+<p>Imagine encountering the system without its machinery first.</p>
+<p>You read a small story about a hen and a fox. At first, the analysis feels almost absurdly attentive. <em>She swept the floor each morning.</em> Surely there cannot be much hidden there. Yet the reading shows an opening participant, an action directed toward an object, a completion, and a temporal phrase that wraps the established relation in recurrence without governing it. Another sentence looks similar and lands elsewhere. Another contains <em>but</em> and is not merely contrastive; it corrects the force of what came before. Another leaves a limitation not merely attached but active.</p>
+<p>Then two door sentences, separated by a single word, appear near opposite ends of the atlas. Then an English sentence is translated into Japanese, travels through a radically different local sequence, and returns to the same coordinate. Then Pythagoras’s theorem appears in unrelated languages, reminding us that invariant structure has always travelled beneath expression. Then Lenz’s law supplies the thought that a system may reveal itself through its response to change. Suddenly the sentence is no longer a box of meaning. It is a change-bearing event.</p>
+<p>The discovery has a rare quality: it is both strange and recognisable. Before the terminology is learned, the distinctions can be felt. Once the terms are learned, familiar sentences begin to disclose another layer. The reader starts asking: what opened? What is the governing Work? Is this movement really Across, or is the complexity only wrapping? What survives — a fact, a fact-with, or something still acting?</p>
+<p>That is how a profound idea should enter the world. Not as a demand for belief, and not as a performance of modesty. It should arrive through demonstrations that let the reader experience the thing before being asked to name it.</p>
+<p>There is confidence in saying that the structure is real. There is generosity in making the route visible. There is intelligence in building a method that can correct its own reader one dimension at a time.</p>
+<p>The other thing that goes on in sentences may have been happening for as long as human beings have spoken. The novelty is not that language suddenly acquired a hidden architecture. The novelty is that someone stayed with the movement long enough to see it.</p>
+<p>And once seen, it becomes difficult to return to the sentence as a container.</p>
+<blockquote>
+<p><strong>The sentence passes. Its structural result remains.</strong></p>
+</blockquote>
+</article><section id="appendix">
+<h2>Appendix: the thirty-five-sentence fox and hen assay</h2>
+<p class="lede">The complete demonstration is retained here as evidence. Each sentence appears with the label-free interrogation, the decoder reasoning, and the recovered coordinate. Open any card to inspect the movement in full.</p>
+
+<details class="sentence-card" id="sentence-1">
+<summary><span class="num">01</span><span>Once upon a time, there was a little red hen who lived in a snug little house at the edge of a wood.</span><span class="cell-pill">Focal Mark, Cell 01</span></summary>
+<div class="sentence-body">
+<h4>Exact sentence</h4>
+<blockquote>Once upon a time, there was a little red hen who lived in a snug little house at the edge of a wood.</blockquote>
+<h4>Interrogation</h4>
+<p>An indefinite story-time was first established, after which the existential construction placed an unnamed participant under determination. “A little red hen” completed that dependency by identifying what existed, and the relative clause then connected the hen to her habitual residence. The temporal formula, descriptive modifiers, and increasingly precise location functioned as linguistic wrapping around the governing introduction.</p>
+<h4>Decoder reasoning</h4>
+<p>An indefinite story-time opens, and “there was” leaves the existent unspecified, creating a field in which something can emerge. The Work is Distinction: “a little red hen” separates one participant from that still-open field. The Orientation is Toward: attention narrows toward this single figure until “hen” completes her identification. The Survivor is Is: once the introduction lands, the hen remains established as a standing identity. The temporal formula, descriptive modifiers, and residence clause enrich that identity without governing its emergence.</p>
+<div class="resolution"><strong>Resolution</strong><br/>Distinction — Toward / Is: Focal Mark, Cell 01</div>
+
+</div>
+</details>
+<details class="sentence-card" id="sentence-2">
+<summary><span class="num">02</span><span>She kept her house neat.</span><span class="cell-pill">Settled Unity-Bearing, Cell 47</span></summary>
+<div class="sentence-body">
+<h4>Exact sentence</h4>
+<blockquote>She kept her house neat.</blockquote>
+<h4>Interrogation</h4>
+<p>“She” first placed a female participant under determination; “kept” then opened a relation involving continuation or maintenance, and “her house” supplied its object. “Neat” completed the governing movement by establishing the house’s maintained condition and retrospectively selecting the relevant sense of “kept.” No substantial wording functions merely as linguistic wrapping.</p>
+<h4>Decoder reasoning</h4>
+<p>“She” opens a participant whose action remains unspecified, and “kept” creates a space for an object and its continuing condition. The Work is Rest: “neat” settles what condition the house was maintained in and fixes the relevant meaning of “kept.” The Orientation is Toward: the sentence narrows toward one definite state of the house. The Survivor is With: the house remains neat, but that condition retains its dependency on her continuing maintenance. The movement lands at “neat.”</p>
+<div class="resolution"><strong>Resolution</strong><br/>Rest — Toward / With: Settled Unity-Bearing, Cell 47</div>
+
+</div>
+</details>
+<details class="sentence-card" id="sentence-3">
+<summary><span class="num">03</span><span>She swept the floor each morning.</span><span class="cell-pill">Direct Bearing, Cell 19</span></summary>
+<div class="sentence-body">
+<h4>Exact sentence</h4>
+<blockquote>She swept the floor each morning.</blockquote>
+<h4>Interrogation</h4>
+<p>“She” first placed a female participant under determination, “swept” established her action, and “the floor” completed the governing action-object dependency. “Each morning” then wrapped that completed relation in a distributive temporal pattern, retrospectively making the sweeping a repeated routine rather than merely a single past event.</p>
+<h4>Decoder reasoning</h4>
+<p>“She” opens a participant whose action remains unspecified, and “swept” directs that action toward “the floor.” The Work is Relation: the sentence connects the woman’s sweeping to the floor as its object. The Orientation is Toward: the action narrows toward that single object until “floor” completes the dependency. The Survivor is Is: the completed relation stands as the fact that she swept the floor. “Each morning” then places that standing relation within a repeated temporal pattern, making it a routine without changing the governing action-object structure.</p>
+<div class="resolution"><strong>Resolution</strong><br/>Relation — Toward / Is: Direct Bearing, Cell 19</div>
+
+</div>
+</details>
+<details class="sentence-card" id="sentence-4">
+<summary><span class="num">04</span><span>She polished her table.</span><span class="cell-pill">Direct Bearing, Cell 19</span></summary>
+<div class="sentence-body">
+<h4>Exact sentence</h4>
+<blockquote>She polished her table.</blockquote>
+<h4>Interrogation</h4>
+<p>“She” first placed a female actor under determination, “polished” established an action requiring an affected object in this construction, and “her table” completed that dependency by identifying what was polished and associating it with a female possessor. No substantial wording functions merely as linguistic wrapping.</p>
+<h4>Decoder reasoning</h4>
+<p>“She” opens a female participant whose action remains unspecified, and “polished” directs that action toward an affected object. The Work is Relation: the sentence connects her act of polishing to “her table” as the thing acted upon. The Orientation is Toward: the movement narrows toward that single object until “table” completes the dependency. The Survivor is Is: once the sentence lands, the actor–action–object relation stands as an established fact. The possessive “her” identifies the table as associated with the same female participant without altering the governing relation.</p>
+<div class="resolution"><strong>Resolution</strong><br/>Relation — Toward / Is: Direct Bearing, Cell 19</div>
+
+</div>
+</details>
+<details class="sentence-card" id="sentence-5">
+<summary><span class="num">05</span><span>She baked her bread.</span><span class="cell-pill">Direct Bearing, Cell 19</span></summary>
+<div class="sentence-body">
+<h4>Exact sentence</h4>
+<blockquote>She baked her bread.</blockquote>
+<h4>Interrogation</h4>
+<p>“She” first placed a female actor under determination, “baked” established a food-cooking action with an open object, and “her bread” completed the governing dependency by identifying the food concerned and associating it with a female possessor. No substantial wording functions merely as linguistic wrapping.</p>
+<h4>Decoder reasoning</h4>
+<p>“She” opens a female participant whose action remains unspecified, and “baked” directs that action toward a food object. The Work is Relation: the sentence connects her act of baking to “her bread” as the thing acted upon. The Orientation is Toward: the movement narrows toward that single object until “bread” completes the dependency. The Survivor is Is: once the sentence lands, the actor–action–object relation stands as an established fact. The possessive “her” associates the bread with the same female participant without changing the governing structure.</p>
+<div class="resolution"><strong>Resolution</strong><br/>Relation — Toward / Is: Direct Bearing, Cell 19</div>
+
+</div>
+</details>
+<details class="sentence-card" id="sentence-6">
+<summary><span class="num">06</span><span>She locked her door whenever she went out.</span><span class="cell-pill">Settled Recurrence, Cell 49</span></summary>
+<div class="sentence-body">
+<h4>Exact sentence</h4>
+<blockquote>She locked her door whenever she went out.</blockquote>
+<h4>Interrogation</h4>
+<p>“She” first placed a female actor under determination, and “locked her door” completed a local action-object relation. “Whenever” then redirected that action into the governing recurrent relation, while “she went out” completed the event whose every relevant occurrence occasioned the locking. The possessive “her” adds identifying association, but there is little substantial linguistic wrapping.</p>
+<h4>Decoder reasoning</h4>
+<p>“She” opens a female participant whose action remains unspecified, and “locked her door” first establishes a complete local action. “Whenever” then makes that action part of a repeated pattern by connecting it to every occasion on which “she went out.” The Work is Rest: the sentence settles the locking as a regular practice rather than a single event. The Orientation is Across: that practice holds across the recurring occasions of her going out. The Survivor is Is: once the movement lands at “out,” a standing recurrence remains established—each departure is accompanied by the locking of her door.</p>
+<div class="resolution"><strong>Resolution</strong><br/>Rest — Across / Is: Settled Recurrence, Cell 49</div>
+
+</div>
+</details>
+<details class="sentence-card" id="sentence-7">
+<summary><span class="num">07</span><span>In the same wood lived a sly fox.</span><span class="cell-pill">Direct Bearing, Cell 19</span></summary>
+<div class="sentence-body">
+<h4>Exact sentence</h4>
+<blockquote>In the same wood lived a sly fox.</blockquote>
+<h4>Interrogation</h4>
+<p>“In the same wood” first placed a contextually identified location under determination, and “lived” established habitation there while leaving the inhabitant open. “A sly fox” completed the governing dependency by identifying that inhabitant. “Sly” functions as descriptive wrapping, while “same” links the location to prior context.</p>
+<h4>Decoder reasoning</h4>
+<p>“In the same wood” opens a known location while leaving its inhabitant unspecified, and “lived” creates a habitation relation that still requires someone to occupy it. The Work is Relation: “a sly fox” connects one participant to the wood as the place where he lived. The Orientation is Toward: attention narrows toward the single inhabitant until “fox” completes the dependency. The Survivor is Is: once the sentence lands, the fox–wood relation remains established as a standing fact. “Sly” describes the fox, while “same” links the wood to an earlier reference without governing the habitation relation.</p>
+<div class="resolution"><strong>Resolution</strong><br/>Relation — Toward / Is: Direct Bearing, Cell 19</div>
+
+</div>
+</details>
+<details class="sentence-card" id="sentence-8">
+<summary><span class="num">08</span><span>The fox had sharp eyes, soft paws, and a very quiet step.</span><span class="cell-pill">Field Distribution, Cell 15</span></summary>
+<div class="sentence-body">
+<h4>Exact sentence</h4>
+<blockquote>The fox had sharp eyes, soft paws, and a very quiet step.</blockquote>
+<h4>Interrogation</h4>
+<p>“The fox” first placed an identifiable participant under determination, and “had” opened a relation of characteristic attribution. “Sharp eyes” and “soft paws” supplied locally complete members of an expanding series, while “and a very quiet step” completed the coordinated set at “step.” The descriptive adjectives and the intensifier “very” colour the attributed features without governing the underlying possessive enumeration.</p>
+<h4>Decoder reasoning</h4>
+<p>“The fox” opens one participant whose characteristics remain unspecified, and “had” creates a field for those characteristics to be supplied. The Work is Expansion: “sharp eyes,” “soft paws,” and “a very quiet step” enlarge the description through an accumulating series. The Orientation is Across: the same attributive relation extends across each member of the list until “step” completes the full set. The Survivor is Does: once the sentence lands, the description remains operative across the fox’s several features, with each one contributing to the larger characterization. The adjectives and “very” colour the individual features without governing the expanding enumeration.</p>
+<div class="resolution"><strong>Resolution</strong><br/>Expansion — Across / Does: Field Distribution, Cell 15</div>
+
+</div>
+</details>
+<details class="sentence-card" id="sentence-9">
+<summary><span class="num">09</span><span>He had watched the little red hen for many days, and he wished to catch her.</span><span class="cell-pill">Relational Cycle, Cell 24</span></summary>
+<div class="sentence-body">
+<h4>Exact sentence</h4>
+<blockquote>He had watched the little red hen for many days, and he wished to catch her.</blockquote>
+<h4>Interrogation</h4>
+<p>“He” first placed a male participant under determination, and “had watched the little red hen for many days” completed a prolonged prior observation. “And” established the governing coordination with a further development, after which “he wished to catch her” completed that development by assigning the same participant a desire directed toward the hen. The hen’s descriptive modifiers and the duration phrase function as linguistic wrapping around the linked observation and intention.</p>
+<h4>Decoder reasoning</h4>
+<p>“He” opens a male participant whose prior relation to the hen is established through “had watched the little red hen for many days.” “And” then carries that observation into the further intention expressed by “he wished to catch her.” The Work is Relation: the sentence links prolonged attention to a desire directed toward the same participant. The Orientation is Across: the movement passes across two connected stages, from watching the hen to wishing to catch her. The Survivor is Does: once the sentence lands at “her,” the earlier observation has become an operative intention—the wish to catch the hen remains active. The duration phrase and descriptive modifiers enrich the relation without governing the transition.</p>
+<div class="resolution"><strong>Resolution</strong><br/>Relation — Across / Does: Relational Cycle, Cell 24</div>
+
+</div>
+</details>
+<details class="sentence-card" id="sentence-10">
+<summary><span class="num">10</span><span>One morning, the little red hen went into her garden to gather sticks for the fire.</span><span class="cell-pill">Responsive Echo, Cell 21</span></summary>
+<div class="sentence-body">
+<h4>Exact sentence</h4>
+<blockquote>One morning, the little red hen went into her garden to gather sticks for the fire.</blockquote>
+<h4>Interrogation</h4>
+<p>“One morning” first supplied a temporal frame, after which “the little red hen went into her garden” developed and completed a directed movement. The second “to” established the governing purpose relation, and “gather sticks” completed the intended action; “for the fire” added the sticks’ further use. The temporal setting, descriptive modifiers, and possessive detail function as linguistic wrapping around this movement-purpose structure.</p>
+<h4>Decoder reasoning</h4>
+<p>“One morning” frames the event, and “the little red hen went into her garden” establishes a locally complete movement. The second “to” then opens the purpose of that movement, which “gather sticks” answers. The Work is Relation: the journey into the garden is connected to the intended act of gathering. The Orientation is Toward: the sentence directs attention toward one specific purpose until “sticks” completes what she went there to gather. The Survivor is Does: once the movement lands, the gathering remains operative as the purpose governing her journey. “For the fire” adds the sticks’ later use without changing that central purpose relation.</p>
+<div class="resolution"><strong>Resolution</strong><br/>Relation — Toward / Does: Responsive Echo, Cell 21</div>
+
+</div>
+</details>
+<details class="sentence-card" id="sentence-11">
+<summary><span class="num">11</span><span>The sly fox crept from behind a bush.</span><span class="cell-pill">Direct Bearing, Cell 19</span></summary>
+<div class="sentence-body">
+<h4>Exact sentence</h4>
+<blockquote>The sly fox crept from behind a bush.</blockquote>
+<h4>Interrogation</h4>
+<p>“The sly fox” first placed an identifiable participant under determination, and “crept” completed the governing subject-action dependency. “From behind a bush” then located the source of that movement and made emergence from concealment natural. “Sly” and the source phrase function as descriptive and spatial wrapping around the central action.</p>
+<h4>Decoder reasoning</h4>
+<p>“The sly fox” opens an identifiable participant whose action remains unspecified, and “crept” completes that action. The Work is Relation: the sentence connects the fox directly to the act of creeping. The Orientation is Toward: attention narrows toward that single predicate until “crept” determines what the fox did. The Survivor is Is: once the sentence lands, the fox–action relation remains established as a standing fact. “Sly” describes the fox, while “from behind a bush” locates the movement’s source and suggests emergence from concealment without governing the central action.</p>
+<div class="resolution"><strong>Resolution</strong><br/>Relation — Toward / Is: Direct Bearing, Cell 19</div>
+
+</div>
+</details>
+<details class="sentence-card" id="sentence-12">
+<summary><span class="num">12</span><span>He carried a large sack over his shoulder.</span><span class="cell-pill">Direct Bearing, Cell 19</span></summary>
+<div class="sentence-body">
+<h4>Exact sentence</h4>
+<blockquote>He carried a large sack over his shoulder.</blockquote>
+<h4>Interrogation</h4>
+<p>“He” first placed a male actor under determination, “carried” opened an action requiring an object in this construction, and “a large sack” completed the governing action-object dependency. “Over his shoulder” then specified the physical arrangement of the carrying. “Large” and the shoulder phrase function as descriptive and spatial wrapping.</p>
+<h4>Decoder reasoning</h4>
+<p>“He” opens a male participant whose action remains unspecified, and “carried” directs that action toward an object. The Work is Relation: the sentence connects him to “a large sack” as the thing being carried. The Orientation is Toward: attention narrows toward that single object until “sack” completes the dependency. The Survivor is Is: once the sentence lands, the actor–action–object relation remains established as a standing fact. “Large” describes the sack, while “over his shoulder” specifies how it was carried without governing the central relation.</p>
+<div class="resolution"><strong>Resolution</strong><br/>Relation — Toward / Is: Direct Bearing, Cell 19</div>
+
+</div>
+</details>
+<details class="sentence-card" id="sentence-13">
+<summary><span class="num">13</span><span>The little red hen heard a rustle in the leaves.</span><span class="cell-pill">Direct Bearing, Cell 19</span></summary>
+<div class="sentence-body">
+<h4>Exact sentence</h4>
+<blockquote>The little red hen heard a rustle in the leaves.</blockquote>
+<h4>Interrogation</h4>
+<p>“The little red hen” first placed an identifiable perceiver under determination, “heard” opened an auditory relation, and “a rustle” completed that governing dependency by identifying the perceived sound. “In the leaves” then located or sourced the rustle, while “little” and “red” provided descriptive wrapping.</p>
+<h4>Decoder reasoning</h4>
+<p>“The little red hen” opens an identifiable perceiver whose experience remains unspecified, and “heard” creates a relation that requires a perceived sound. The Work is Relation: the sentence connects the hen to “a rustle” as what she heard. The Orientation is Toward: attention narrows toward that single perceptual object until “rustle” completes the dependency. The Survivor is Is: once the sentence lands, the hen–sound relation remains established as a standing fact. “In the leaves” locates or sources the rustle, while “little” and “red” describe the hen without governing the auditory relation.</p>
+<div class="resolution"><strong>Resolution</strong><br/>Relation — Toward / Is: Direct Bearing, Cell 19</div>
+
+</div>
+</details>
+<details class="sentence-card" id="sentence-14">
+<summary><span class="num">14</span><span>She turned quickly, but the fox sprang forward and caught her.</span><span class="cell-pill">Corrective Turn, Cell 33</span></summary>
+<div class="sentence-body">
+<h4>Exact sentence</h4>
+<blockquote>She turned quickly, but the fox sprang forward and caught her.</blockquote>
+<h4>Interrogation</h4>
+<p>“She” first placed a female participant under determination, and “turned quickly” completed her initial action. “But” established the governing adversative redirection to the fox, whose locally coordinated actions developed from springing forward to catching her. “Quickly” and “forward” function as manner and directional wrapping around the contrasting action sequence.</p>
+<h4>Decoder reasoning</h4>
+<p>“She turned quickly” first establishes the hen’s attempted response, but “but” redirects the sentence away from that action and toward the fox’s opposing movement. The Work is Correction: the adversative turn prevents her quick reaction from governing the outcome and replaces its direction with the fox’s successful attack. The Orientation is Across: that correction carries through the coordinated actions “sprang forward and caught her.” The Survivor is Does: once the sentence lands at “her,” the fox’s intervention remains operative—the hen has been caught. “Quickly” and “forward” colour the opposed actions without governing the redirection.</p>
+<div class="resolution"><strong>Resolution</strong><br/>Correction — Across / Does: Corrective Turn, Cell 33</div>
+
+</div>
+</details>
+<details class="sentence-card" id="sentence-15">
+<summary><span class="num">15</span><span>He popped her into the sack, tied it tightly, and set off through the wood toward his den.</span><span class="cell-pill">Sequential Link, Cell 22</span></summary>
+<div class="sentence-body">
+<h4>Exact sentence</h4>
+<blockquote>He popped her into the sack, tied it tightly, and set off through the wood toward his den.</blockquote>
+<h4>Interrogation</h4>
+<p>“He” first placed a male actor under determination, after which “popped her into the sack” and “tied it tightly” supplied two successive, locally complete actions. “And” established the governing final coordination, and “set off” completed it with the actor’s departure; the route through the wood and direction toward his den provided spatial wrapping around that last stage.</p>
+<h4>Decoder reasoning</h4>
+<p>“He” opens a male participant whose actions unfold through a series: he first puts the hen into the sack, then secures it, and finally departs. The Work is Relation: the sentence connects three locally complete actions as one ordered progression. The Orientation is Across: the movement passes across “popped,” “tied,” and “set off,” with each stage preparing the next. The Survivor is Is: once the sentence lands at “set off,” a completed sequence stands in which the hen has been enclosed, the sack secured, and the fox has departed. “Tightly,” “through the wood,” and “toward his den” add manner, route, and direction without governing the sequence itself.</p>
+<div class="resolution"><strong>Resolution</strong><br/>Relation — Across / Is: Sequential Link, Cell 22</div>
+
+</div>
+</details>
+<details class="sentence-card" id="sentence-16">
+<summary><span class="num">16</span><span>The little red hen was frightened, but she was clever.</span><span class="cell-pill">Pivoted Balance, Cell 20</span></summary>
+<div class="sentence-body">
+<h4>Exact sentence</h4>
+<blockquote>The little red hen was frightened, but she was clever.</blockquote>
+<h4>Interrogation</h4>
+<p>“The little red hen” first placed an identifiable participant under determination, and “was frightened” completed an initial attribution. “But” established the governing adversative redirection, after which “she was clever” supplied the counterbalancing quality. “Little” and “red” function as descriptive wrapping around the contrast between fear and cleverness.</p>
+<h4>Decoder reasoning</h4>
+<p>“The little red hen was frightened” first establishes one quality, while “but” prevents that quality from defining her alone and brings “she was clever” into relation with it. The Work is Relation: fear and cleverness are held together as two distinct truths about the same hen. The Orientation is Toward: both qualities gather around one shared focal participant. The Survivor is With: cleverness does not erase fear; the completed description retains both qualities in a counterbalanced relation. “Little” and “red” describe the hen without governing that balance.</p>
+<div class="resolution"><strong>Resolution</strong><br/>Relation — Toward / With: Pivoted Balance, Cell 20</div>
+
+</div>
+</details>
+<details class="sentence-card" id="sentence-17">
+<summary><span class="num">17</span><span>Inside the sack, she felt about with her claws.</span><span class="cell-pill">Direct Bearing, Cell 19</span></summary>
+<div class="sentence-body">
+<h4>Exact sentence</h4>
+<blockquote>Inside the sack, she felt about with her claws.</blockquote>
+<h4>Interrogation</h4>
+<p>“Inside the sack” first supplied a confined spatial frame, after which “she” placed a female participant under determination. “Felt” opened a tactile predicate, and “about” completed the governing movement by selecting exploratory searching. The sack phrase and “with her claws” function as spatial and instrumental wrapping around that action.</p>
+<h4>Decoder reasoning</h4>
+<p>“Inside the sack” frames a confined space, and “she” introduces the participant whose action remains unspecified. “Felt” begins a tactile action, while “about” determines that action as exploratory searching. The Work is Relation: the sentence connects the hen directly to the act of feeling about. The Orientation is Toward: attention narrows toward that single completed action until “about” fixes what kind of feeling occurred. The Survivor is Is: once the sentence lands, the hen’s exploratory action stands as an established event. “Inside the sack” and “with her claws” locate the search and identify its instrument without governing the central action.</p>
+<div class="resolution"><strong>Resolution</strong><br/>Relation — Toward / Is: Direct Bearing, Cell 19</div>
+
+</div>
+</details>
+<details class="sentence-card" id="sentence-18">
+<summary><span class="num">18</span><span>She found a small pair of scissors that she had been carrying in her apron pocket.</span><span class="cell-pill">Direct Bearing, Cell 19</span></summary>
+<div class="sentence-body">
+<h4>Exact sentence</h4>
+<blockquote>She found a small pair of scissors that she had been carrying in her apron pocket.</blockquote>
+<h4>Interrogation</h4>
+<p>“She” first placed a female finder under determination, “found” opened a discovery relation, and “a small pair of scissors” completed it by identifying the object. The relative clause then retrospectively identified those scissors as something she had already been carrying in her apron pocket, making “found” naturally mean located or recovered. “Small” and the relative clause function as descriptive and circumstantial wrapping around the governing discovery.</p>
+<h4>Decoder reasoning</h4>
+<p>“She” opens a female participant whose discovery remains unspecified, and “found” creates a relation that requires an object. The Work is Relation: the sentence connects her to “a small pair of scissors” as what she found. The Orientation is Toward: attention narrows toward that single discovered object until “scissors” completes the dependency. The Survivor is Is: once the sentence lands, the finder–object relation remains established as a standing fact. The relative clause explains that she had already been carrying the scissors, retrospectively making “found” mean located or recovered, without replacing the governing discovery.</p>
+<div class="resolution"><strong>Resolution</strong><br/>Relation — Toward / Is: Direct Bearing, Cell 19</div>
+
+</div>
+</details>
+<details class="sentence-card" id="sentence-19">
+<summary><span class="num">19</span><span>Very carefully, she snipped a hole in the sack.</span><span class="cell-pill">Direct Bearing, Cell 19</span></summary>
+<div class="sentence-body">
+<h4>Exact sentence</h4>
+<blockquote>Very carefully, she snipped a hole in the sack.</blockquote>
+<h4>Interrogation</h4>
+<p>“Very carefully” first established an emphasized manner, after which “she” placed a female actor under determination. “Snipped” opened a cutting action, and “a hole” completed the governing movement by identifying its produced result. “In the sack” located that result in the affected material, while the opening adverb phrase functioned as manner wrapping.</p>
+<h4>Decoder reasoning</h4>
+<p>“Very carefully” frames the action’s manner, while “she” introduces the participant whose action remains unspecified. “Snipped” opens a cutting action, and “a hole” identifies the result produced by that action. The Work is Relation: the sentence connects her act of snipping directly to the hole it creates. The Orientation is Toward: attention narrows toward that single result until “hole” completes the action. The Survivor is Is: once the sentence lands, the hole remains as a standing result in the sack. “Very carefully” describes how she acted, while “in the sack” locates the result without governing its production.</p>
+<div class="resolution"><strong>Resolution</strong><br/>Relation — Toward / Is: Direct Bearing, Cell 19</div>
+
+</div>
+</details>
+<details class="sentence-card" id="sentence-20">
+<summary><span class="num">20</span><span>The fox walked on and did not notice.</span><span class="cell-pill">Sequential Link, Cell 22</span></summary>
+<div class="sentence-body">
+<h4>Exact sentence</h4>
+<blockquote>The fox walked on and did not notice.</blockquote>
+<h4>Interrogation</h4>
+<p>“The fox” first placed an identifiable participant under determination, and “walked on” completed a local predicate of continued movement. “And” established the governing coordination with a second predicate, while “did not notice” completed that addition by assigning the fox an absence of awareness. No substantial wording functions merely as linguistic wrapping.</p>
+<h4>Decoder reasoning</h4>
+<p>“The fox walked on” first establishes his continued movement, and “and” carries the sentence into the further fact that he “did not notice.” The Work is Relation: the sentence links ongoing movement with an accompanying absence of awareness. The Orientation is Across: the movement passes across the two coordinated predicates, from walking onward to failing to notice. The Survivor is Is: once the sentence lands at “notice,” a completed situation stands in which the fox continues on without becoming aware of what has happened.</p>
+<div class="resolution"><strong>Resolution</strong><br/>Relation — Across / Is: Sequential Link, Cell 22</div>
+
+</div>
+</details>
+<details class="sentence-card" id="sentence-21">
+<summary><span class="num">21</span><span>The little red hen slipped out of the hole and hid behind a tree.</span><span class="cell-pill">Sequential Link, Cell 22</span></summary>
+<div class="sentence-body">
+<h4>Exact sentence</h4>
+<blockquote>The little red hen slipped out of the hole and hid behind a tree.</blockquote>
+<h4>Interrogation</h4>
+<p>“The little red hen” first placed an identifiable participant under determination, and “slipped out of the hole” completed an exit from a specified source. “And” established the governing coordination with a second action, while “hid behind a tree” completed that action and located the concealment. “Little,” “red,” and the precise spatial landmarks provide descriptive and locative wrapping around the action sequence.</p>
+<h4>Decoder reasoning</h4>
+<p>“The little red hen slipped out of the hole” first establishes a completed escape from confinement, and “and” carries that movement into the second action, “hid behind a tree.” The Work is Relation: the sentence connects escape and concealment as successive parts of one movement. The Orientation is Across: the action passes from leaving the hole to taking cover behind the tree. The Survivor is Is: once the sentence lands at “tree,” a completed sequence stands in which the hen has escaped and is concealed. “Little” and “red” describe the hen, while the source and hiding place locate the two actions without governing their sequence.</p>
+<div class="resolution"><strong>Resolution</strong><br/>Relation — Across / Is: Sequential Link, Cell 22</div>
+
+</div>
+</details>
+<details class="sentence-card" id="sentence-22">
+<summary><span class="num">22</span><span>Then she picked up a large stone and placed it inside the sack.</span><span class="cell-pill">Sequential Link, Cell 22</span></summary>
+<div class="sentence-body">
+<h4>Exact sentence</h4>
+<blockquote>Then she picked up a large stone and placed it inside the sack.</blockquote>
+<h4>Interrogation</h4>
+<p>“Then” first supplied a temporal link to an earlier event, after which “she picked up a large stone” completed the first action. “And” established the governing coordination with a second action, while “placed it inside the sack” completed that stage by retaining the stone as object and assigning it a new location. “Then” and “large” function as temporal and descriptive wrapping.</p>
+<h4>Decoder reasoning</h4>
+<p>“Then” links the sentence to an earlier moment, while “she picked up a large stone” establishes the first completed action. “And” carries that action into “placed it inside the sack,” where the same stone receives a new location. The Work is Relation: picking up and placing are connected as successive stages of one practical movement. The Orientation is Across: the action passes across two coordinated predicates, from acquiring the stone to putting it inside the sack. The Survivor is Is: once the sentence lands at “sack,” a completed sequence stands—the stone has been picked up and is now inside the sack. “Then” provides temporal linkage, and “large” describes the stone without governing the sequence.</p>
+<div class="resolution"><strong>Resolution</strong><br/>Relation — Across / Is: Sequential Link, Cell 22</div>
+
+</div>
+</details>
+<details class="sentence-card" id="sentence-23">
+<summary><span class="num">23</span><span>She tied the hole neatly and hurried home by another path.</span><span class="cell-pill">Sequential Link, Cell 22</span></summary>
+<div class="sentence-body">
+<h4>Exact sentence</h4>
+<blockquote>She tied the hole neatly and hurried home by another path.</blockquote>
+<h4>Interrogation</h4>
+<p>“She” first placed a female actor under determination, and “tied the hole neatly” completed an action of careful fastening. “And” established the governing coordination with a second action, while “hurried home” supplied rapid movement to a destination and “by another path” specified its alternative route. “Neatly” and the route phrase function as manner and spatial wrapping.</p>
+<h4>Decoder reasoning</h4>
+<p>“She tied the hole neatly” first establishes the fastening as a completed action, and “and” carries the same participant into the second action, “hurried home.” The Work is Relation: tying the hole and returning home are connected as successive stages of one practical sequence. The Orientation is Across: the movement passes across the two coordinated actions, from securing the sack to leaving by an alternative route. The Survivor is Is: once the sentence lands at “home,” a completed history stands—the hole has been tied and the hen has hurried home. “Neatly” describes the fastening, while “by another path” specifies the route without governing the sequence.</p>
+<div class="resolution"><strong>Resolution</strong><br/>Relation — Across / Is: Sequential Link, Cell 22</div>
+
+</div>
+</details>
+<details class="sentence-card" id="sentence-24">
+<summary><span class="num">24</span><span>The fox felt the sack grow heavy.</span><span class="cell-pill">Responsive Echo, Cell 21</span></summary>
+<div class="sentence-body">
+<h4>Exact sentence</h4>
+<blockquote>The fox felt the sack grow heavy.</blockquote>
+<h4>Interrogation</h4>
+<p>“The fox” first placed an identifiable perceiver under determination, and “felt the sack” initially permitted a simple tactile relation. “Grow” completed the governing shift to perception of an unfolding event by making the sack the understood subject of change, while “heavy” locally completed that change by naming its resulting state. No substantial wording functions merely as linguistic wrapping.</p>
+<h4>Decoder reasoning</h4>
+<p>“The fox” opens a perceiver whose experience remains unspecified, and “felt” creates a demand for what he perceived. “The sack” begins to supply that content, but “grow” shifts the relation from simple touch to the perception of an unfolding change, which “heavy” completes. The Work is Relation: the sentence connects the fox’s perception to the event of the sack becoming heavy. The Orientation is Toward: attention narrows toward that single perceived change until “heavy” completes it. The Survivor is Does: what remains is not merely a static fox–sack relation, but the operative event of the sack growing heavy as perceived by the fox.</p>
+<div class="resolution"><strong>Resolution</strong><br/>Relation — Toward / Does: Responsive Echo, Cell 21</div>
+
+</div>
+</details>
+<details class="sentence-card" id="sentence-25">
+<summary><span class="num">25</span><span>“She is a plump little hen,” said the fox.</span><span class="cell-pill">Focal Mark, Cell 01</span></summary>
+<div class="sentence-body">
+<h4>Exact sentence</h4>
+<blockquote>“She is a plump little hen,” said the fox.</blockquote>
+<h4>Interrogation</h4>
+<p>“She” first placed a female referent under determination within the quotation, “is” opened a copular classification, and “a plump little hen” completed it at “hen.” “Said the fox” then identified the quotation’s speaker without altering its internal claim. “Plump” and “little” provide descriptive wrapping, while the reporting clause provides attributional wrapping.</p>
+<h4>Decoder reasoning</h4>
+<p>“She” opens a female referent whose identity remains to be specified, and “is” creates a space for that identification. The Work is Distinction: “a plump little hen” distinguishes what she is by placing her under one definite classification. The Orientation is Toward: attention narrows toward that single identity until “hen” completes the copular dependency. The Survivor is Is: once the sentence lands, she remains established as a hen—a standing identity rather than an ongoing action. “Plump” and “little” enrich that identity, while “said the fox” attributes the completed statement without governing its internal classification.</p>
+<div class="resolution"><strong>Resolution</strong><br/>Distinction — Toward / Is: Focal Mark, Cell 01</div>
+
+</div>
+</details>
+<details class="sentence-card" id="sentence-26">
+<summary><span class="num">26</span><span>He carried the sack all the way to his den.</span><span class="cell-pill">Direct Bearing, Cell 19</span></summary>
+<div class="sentence-body">
+<h4>Exact sentence</h4>
+<blockquote>He carried the sack all the way to his den.</blockquote>
+<h4>Interrogation</h4>
+<p>“He” first placed a male actor under determination, “carried” opened a transport relation, and “the sack” completed the governing action-object dependency. “All the way to his den” then extended that transport across the full route and supplied its endpoint. The extent-and-destination phrase functions as spatial and emphatic wrapping.</p>
+<h4>Decoder reasoning</h4>
+<p>“He” opens a male participant whose action remains unspecified, and “carried” directs that action toward an object. The Work is Relation: the sentence connects him to “the sack” as the thing being transported. The Orientation is Toward: attention narrows toward that single object until “sack” completes the governing dependency. The Survivor is Is: once the sentence lands, the actor–action–object relation remains established as a standing fact. “All the way to his den” extends and emphasizes the route and supplies its endpoint without governing the central transport relation.</p>
+<div class="resolution"><strong>Resolution</strong><br/>Relation — Toward / Is: Direct Bearing, Cell 19</div>
+
+</div>
+</details>
+<details class="sentence-card" id="sentence-27">
+<summary><span class="num">27</span><span>When he reached home, he called to his family.</span><span class="cell-pill">Sequential Link, Cell 22</span></summary>
+<div class="sentence-body">
+<h4>Exact sentence</h4>
+<blockquote>When he reached home, he called to his family.</blockquote>
+<h4>Interrogation</h4>
+<p>“When” first placed a temporal relation under determination, requiring both an occasion-setting event and a main event. “He reached home” completed the temporal frame, and “he called to his family” supplied what occurred on that occasion. The recipient phrase adds directional specification, while little other wording functions as linguistic wrapping.</p>
+<h4>Decoder reasoning</h4>
+<p>“When” opens a relation between an occasion and the event that occurs within it. “He reached home” establishes the occasion, and “he called to his family” supplies the event attached to that arrival. The Work is Relation: reaching home and calling are connected as parts of one temporal history. The Orientation is Across: the movement passes from the completed arrival across to the subsequent call, landing at “family” when the second event is fully specified. The Survivor is Is: once the sentence is complete, an ordered relation stands—upon reaching home, he called to his family.</p>
+<div class="resolution"><strong>Resolution</strong><br/>Relation — Across / Is: Sequential Link, Cell 22</div>
+
+</div>
+</details>
+<details class="sentence-card" id="sentence-28">
+<summary><span class="num">28</span><span>“I have brought supper,” said the fox.</span><span class="cell-pill">Direct Bearing, Cell 19</span></summary>
+<div class="sentence-body">
+<h4>Exact sentence</h4>
+<blockquote>“I have brought supper,” said the fox.</blockquote>
+<h4>Interrogation</h4>
+<p>“I” first placed the quoted speaker under determination, “have brought” established a completed action with present relevance, and “supper” completed the governing action-object dependency. “Said the fox” then identified the speaker and anchored “I” to him without altering the quotation’s internal claim. The reporting clause functions as attributional wrapping.</p>
+<h4>Decoder reasoning</h4>
+<p>“I” opens the quoted speaker as a participant whose action remains unspecified, and “have brought” directs that action toward an object while presenting it as completed with present relevance. The Work is Relation: the sentence connects the speaker to “supper” as what he has brought. The Orientation is Toward: attention narrows toward that single object until “supper” completes the dependency. The Survivor is Is: once the quotation lands, the completed speaker–action–object relation stands as a present fact—the supper has been brought. “Said the fox” then identifies the speaker and resolves “I” without changing the governing relation inside the quotation.</p>
+<div class="resolution"><strong>Resolution</strong><br/>Relation — Toward / Is: Direct Bearing, Cell 19</div>
+
+</div>
+</details>
+<details class="sentence-card" id="sentence-29">
+<summary><span class="num">29</span><span>He tipped the sack over the cooking pot.</span><span class="cell-pill">Direct Bearing, Cell 19</span></summary>
+<div class="sentence-body">
+<h4>Exact sentence</h4>
+<blockquote>He tipped the sack over the cooking pot.</blockquote>
+<h4>Interrogation</h4>
+<p>“He” first placed a male actor under determination, “tipped” opened a physical action, and “the sack” completed the governing action-object dependency. “Over the cooking pot” then located the sack or tipping action relative to the pot and made an intended emptying natural without asserting it. The final prepositional phrase functions as spatial wrapping.</p>
+<h4>Decoder reasoning</h4>
+<p>“He” opens a male participant whose action remains unspecified, and “tipped” directs that action toward an affected object. The Work is Relation: the sentence connects him to “the sack” as the thing he tipped. The Orientation is Toward: attention narrows toward that single object until “sack” completes the governing dependency. The Survivor is Is: once the sentence lands, the actor–action–object relation remains established as a completed fact. “Over the cooking pot” positions the action spatially and suggests an intended emptying without making that result part of the governing structure.</p>
+<div class="resolution"><strong>Resolution</strong><br/>Relation — Toward / Is: Direct Bearing, Cell 19</div>
+
+</div>
+</details>
+<details class="sentence-card" id="sentence-30">
+<summary><span class="num">30</span><span>The stone fell out with a great splash and sent hot water everywhere.</span><span class="cell-pill">Sequential Link, Cell 22</span></summary>
+<div class="sentence-body">
+<h4>Exact sentence</h4>
+<blockquote>The stone fell out with a great splash and sent hot water everywhere.</blockquote>
+<h4>Interrogation</h4>
+<p>“The stone” first placed an identifiable object under determination, and “fell out with a great splash” completed an initial movement with an accompanying impact. “And” established the governing coordination with a second event, while “sent hot water everywhere” completed that event as extensive displacement caused by the stone. The splash phrase and “hot” provide accompanying and descriptive wrapping.</p>
+<h4>Decoder reasoning</h4>
+<p>“The stone fell out with a great splash” first establishes a completed movement and impact, and “and” carries that event into its consequence: the stone “sent hot water everywhere.” The Work is Relation: the fall and the displacement of the water are connected as cause and resulting event. The Orientation is Across: the movement passes from the stone’s fall across to the effect it produces, landing at “everywhere” when the extent of the displacement is complete. The Survivor is Is: once the sentence ends, a completed causal sequence stands—the stone has fallen out and the hot water has been scattered throughout the surrounding area. “With a great splash” accompanies the impact, while “hot” describes the water without governing the sequence.</p>
+<div class="resolution"><strong>Resolution</strong><br/>Relation — Across / Is: Sequential Link, Cell 22</div>
+
+</div>
+</details>
+<details class="sentence-card" id="sentence-31">
+<summary><span class="num">31</span><span>The fox jumped back in pain and anger.</span><span class="cell-pill">Direct Bearing, Cell 19</span></summary>
+<div class="sentence-body">
+<h4>Exact sentence</h4>
+<blockquote>The fox jumped back in pain and anger.</blockquote>
+<h4>Interrogation</h4>
+<p>“The fox” first placed an identifiable participant under determination, “jumped” established a sudden movement, and “back” completed the governing action by giving it a withdrawing direction. “In pain and anger” then attributed simultaneous physical and emotional states to the fox, functioning as circumstantial and potentially causal wrapping.</p>
+<h4>Decoder reasoning</h4>
+<p>“The fox” opens an identifiable participant whose action remains unspecified, and “jumped” begins a movement that “back” completes as withdrawal. The Work is Relation: the sentence connects the fox directly to the completed action of jumping back. The Orientation is Toward: although “back” describes physical movement away from a prior position, the sentence’s structural attention narrows toward one determinate predicate—what the fox did. The Survivor is Is: once the movement lands at “back,” the fox–action relation remains established as a completed fact. “In pain and anger” supplies the physical and emotional circumstances surrounding the jump without governing it.</p>
+<div class="resolution"><strong>Resolution</strong><br/>Relation — Toward / Is: Direct Bearing, Cell 19</div>
+
+</div>
+</details>
+<details class="sentence-card" id="sentence-32">
+<summary><span class="num">32</span><span>The little red hen was already safe at home.</span><span class="cell-pill">Focal Mark, Cell 01</span></summary>
+<div class="sentence-body">
+<h4>Exact sentence</h4>
+<blockquote>The little red hen was already safe at home.</blockquote>
+<h4>Interrogation</h4>
+<p>“The little red hen” first placed an identifiable participant under determination, “was” opened a past-tense copular relation, and “safe” completed the governing state attribution. “Already” positioned that safety relative to an unstated expectation or time, while “at home” located it. The descriptive modifiers, temporal emphasis, and location function as linguistic wrapping.</p>
+<h4>Decoder reasoning</h4>
+<p>“The little red hen” opens an identifiable participant whose condition remains unspecified, and “was” creates a space for that condition to be established. The Work is Distinction: “safe” marks the hen by separating her present condition from danger or vulnerability. The Orientation is Toward: attention narrows toward that single condition until “safe” completes the attribution. The Survivor is Is: once the sentence lands, the hen remains established in a standing state of safety. “Already” places that safety earlier than might have been expected, while “at home” locates it without governing the central attribution.</p>
+<div class="resolution"><strong>Resolution</strong><br/>Distinction — Toward / Is: Focal Mark, Cell 01</div>
+
+</div>
+</details>
+<details class="sentence-card" id="sentence-33">
+<summary><span class="num">33</span><span>She locked her door, stirred her fire, and made herself a warm supper.</span><span class="cell-pill">Sequential Link, Cell 22</span></summary>
+<div class="sentence-body">
+<h4>Exact sentence</h4>
+<blockquote>She locked her door, stirred her fire, and made herself a warm supper.</blockquote>
+<h4>Interrogation</h4>
+<p>“She” first placed a female actor under determination, after which “locked her door” and “stirred her fire” supplied two locally complete actions. “And” established the governing final coordination, while “made herself a warm supper” completed it by identifying both the prepared result and the actor as beneficiary. “Warm” and the possessive details provide descriptive and relational wrapping.</p>
+<h4>Decoder reasoning</h4>
+<p>“She” opens a female participant whose actions unfold through a three-part sequence: she locks the door, stirs the fire, and prepares supper for herself. The Work is Relation: the sentence connects these separate actions into one ordered practical progression. The Orientation is Across: the movement passes across all three coordinated predicates, with each action contributing to the completed routine. The Survivor is Is: once the sentence lands at “supper,” a finished sequence stands—the house is secured, the fire is tended, and the meal has been made. “Warm” describes the supper, while the possessive details and “herself” specify association and benefit without governing the sequence.</p>
+<div class="resolution"><strong>Resolution</strong><br/>Relation — Across / Is: Sequential Link, Cell 22</div>
+
+</div>
+</details>
+<details class="sentence-card" id="sentence-34">
+<summary><span class="num">34</span><span>From that day onward, the sly fox watched the little red hen from a distance, but he never caught her.</span><span class="cell-pill">Corrective Turn, Cell 33</span></summary>
+<div class="sentence-body">
+<h4>Exact sentence</h4>
+<blockquote>From that day onward, the sly fox watched the little red hen from a distance, but he never caught her.</blockquote>
+<h4>Interrogation</h4>
+<p>“From that day onward” first established a continuing temporal frame, after which “the sly fox watched the little red hen from a distance” completed an observation relation. “But” established the governing adversative redirection, and “he never caught her” completed it as persistent failure of capture. The temporal frame, descriptive modifiers, and distance phrase function as temporal, descriptive, and spatial wrapping.</p>
+<h4>Decoder reasoning</h4>
+<p>“The sly fox watched the little red hen” first establishes an ongoing observation that might naturally lead toward capture, but “but” turns the sentence away from that expected result and into “he never caught her.” The Work is Correction: the adversative clause corrects the implication that continued watching produced success. The Orientation is Across: the corrective turn carries the movement from sustained observation across to persistent failure of capture. The Survivor is Does: once the sentence lands at “her,” the non-capture remains operative throughout the continuing period—despite watching, the fox never succeeds. “From that day onward,” the descriptive modifiers, and “from a distance” frame the duration, participants, and spatial circumstances without governing the correction.</p>
+<div class="resolution"><strong>Resolution</strong><br/>Correction — Across / Does: Corrective Turn, Cell 33</div>
+
+</div>
+</details>
+<details class="sentence-card" id="sentence-35">
+<summary><span class="num">35</span><span>The little red hen kept her scissors in her apron pocket, and she listened carefully whenever the leaves rustled in the wood.</span><span class="cell-pill">Settled Recurrence, Cell 49</span></summary>
+<div class="sentence-body">
+<h4>Exact sentence</h4>
+<blockquote>The little red hen kept her scissors in her apron pocket, and she listened carefully whenever the leaves rustled in the wood.</blockquote>
+<h4>Interrogation</h4>
+<p>“The little red hen” first placed an identifiable participant under determination, and “kept her scissors in her apron pocket” completed a practice of storage or carriage. “And” established the governing coordination with a second practice, while “she listened carefully” supplied that practice and “whenever the leaves rustled in the wood” distributed it across recurring occasions. The descriptive modifiers, manner adverb, and final location phrase function as linguistic wrapping.</p>
+<h4>Decoder reasoning</h4>
+<p>“The little red hen” opens an identifiable participant whose continuing practices remain to be established. Keeping the scissors in her apron pocket supplies one standing habit, and “and” adds the second practice of listening carefully whenever the leaves rustled. The Work is Rest: the sentence settles these actions as an established routine rather than isolated events. The Orientation is Across: that routine extends across recurring occasions, with “whenever” distributing her listening through every relevant rustling of the leaves. The Survivor is Is: once the sentence lands at “wood,” a stable pattern remains—the hen keeps the scissors ready and repeatedly listens for danger. The descriptive modifiers, “carefully,” and the final location phrase enrich the routine without governing it.</p>
+<div class="resolution"><strong>Resolution</strong><br/>Rest — Across / Is: Settled Recurrence, Cell 49</div>
+
+</div>
+</details>
+</section></main>
+<footer><div>The Other Thing That Goes On in Sentences</div><div class="count">Narrative essay: 7,902 words · Evidence appendix: 6,762 words</div></footer>
+</body></html>

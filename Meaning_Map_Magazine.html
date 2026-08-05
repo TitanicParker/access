@@ -1,0 +1,854 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="The Meaning Map: a simple way to notice how sentences guide attention, complete a movement, and leave an effect behind.">
+  <title>The Meaning Map</title>
+  <style>
+    :root {
+      --ink: #22231f;
+      --muted: #62635d;
+      --paper: #f7f2e8;
+      --card: #fffdf8;
+      --accent: #a43d2f;
+      --accent-dark: #75291f;
+      --gold: #dcae55;
+      --sage: #71816d;
+      --line: #d9d1c2;
+      --shadow: 0 18px 50px rgba(55, 45, 30, 0.13);
+      --radius: 24px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top left, rgba(220, 174, 85, 0.18), transparent 34rem),
+        var(--paper);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 18px;
+      line-height: 1.62;
+    }
+
+    a { color: inherit; }
+
+    .skip-link {
+      position: absolute;
+      left: -9999px;
+      top: 0;
+      z-index: 100;
+      padding: 0.75rem 1rem;
+      background: #fff;
+      color: #000;
+    }
+
+    .skip-link:focus { left: 1rem; top: 1rem; }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      border-bottom: 1px solid rgba(117, 41, 31, 0.12);
+      background: rgba(247, 242, 232, 0.94);
+      backdrop-filter: blur(10px);
+    }
+
+    .site-header-inner {
+      width: min(1120px, calc(100% - 2rem));
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      min-height: 64px;
+    }
+
+    .brand {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 0.86rem;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent-dark);
+      text-decoration: none;
+    }
+
+    .site-nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 0.25rem 0.85rem;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 0.8rem;
+    }
+
+    .site-nav a {
+      text-decoration: none;
+      padding: 0.25rem 0;
+      border-bottom: 2px solid transparent;
+    }
+
+    .site-nav a:hover,
+    .site-nav a:focus-visible {
+      color: var(--accent-dark);
+      border-bottom-color: var(--gold);
+    }
+
+    main {
+      width: min(1120px, calc(100% - 2rem));
+      margin: 2rem auto 4rem;
+    }
+
+    .page {
+      position: relative;
+      margin: 0 0 2rem;
+      padding: clamp(2rem, 5vw, 4.75rem);
+      border: 1px solid rgba(117, 41, 31, 0.10);
+      border-radius: var(--radius);
+      background: var(--card);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .page::after {
+      content: "";
+      position: absolute;
+      width: 220px;
+      height: 220px;
+      right: -90px;
+      bottom: -110px;
+      border-radius: 50%;
+      background: rgba(220, 174, 85, 0.10);
+      pointer-events: none;
+    }
+
+    .cover {
+      min-height: min(760px, 88vh);
+      display: grid;
+      align-content: space-between;
+      background:
+        linear-gradient(135deg, rgba(117, 41, 31, 0.98), rgba(164, 61, 47, 0.93)),
+        var(--accent-dark);
+      color: #fffaf1;
+    }
+
+    .cover::after {
+      width: 420px;
+      height: 420px;
+      right: -120px;
+      bottom: -210px;
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .eyebrow,
+    .section-label,
+    .number,
+    .tiny-label {
+      font-family: Arial, Helvetica, sans-serif;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow {
+      margin: 0;
+      font-size: 0.75rem;
+      color: #f3d79c;
+    }
+
+    .cover h1 {
+      max-width: 8ch;
+      margin: 0.65rem 0 0;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: clamp(4rem, 12vw, 8.8rem);
+      line-height: 0.82;
+      letter-spacing: -0.075em;
+      text-transform: uppercase;
+    }
+
+    .cover-deck {
+      max-width: 38rem;
+      margin: 1.5rem 0 0;
+      font-size: clamp(1.2rem, 2.4vw, 1.75rem);
+      line-height: 1.35;
+      color: #fff2db;
+    }
+
+    .cover-stamp,
+    .stamp {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.65rem;
+    }
+
+    .cover-stamp { margin: 3rem 0 1.5rem; }
+
+    .cover-stamp div,
+    .stamp div {
+      padding: 1rem;
+      border-radius: 14px;
+      text-align: center;
+      font-family: Arial, Helvetica, sans-serif;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .cover-stamp div {
+      border: 1px solid rgba(255, 255, 255, 0.28);
+      background: rgba(255, 255, 255, 0.09);
+    }
+
+    .cover-note {
+      max-width: 48rem;
+      margin: 0;
+      color: #f3dfbd;
+    }
+
+    .cover-footer {
+      margin-top: 3rem;
+      padding-top: 1.25rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.22);
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 0.88rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .section-topline {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 2.8rem;
+    }
+
+    .section-label {
+      margin: 0;
+      color: var(--accent-dark);
+      font-size: 0.78rem;
+    }
+
+    .number {
+      color: var(--gold);
+      font-size: 1.05rem;
+    }
+
+    h2, h3, h4 {
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--ink);
+    }
+
+    h2 {
+      max-width: 16ch;
+      margin: 0 0 1.2rem;
+      font-size: clamp(2.3rem, 5vw, 4.3rem);
+      line-height: 1.02;
+      letter-spacing: -0.045em;
+    }
+
+    h3 {
+      margin: 0 0 0.85rem;
+      font-size: clamp(1.35rem, 3vw, 2.05rem);
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+    }
+
+    h4 {
+      margin: 0;
+      font-size: 1rem;
+      line-height: 1.3;
+    }
+
+    .lead {
+      max-width: 43rem;
+      margin: 0 0 1.5rem;
+      font-size: clamp(1.25rem, 2.4vw, 1.75rem);
+      line-height: 1.42;
+    }
+
+    .prose { max-width: 47rem; }
+    .prose p:first-child { margin-top: 0; }
+
+    .pullquote {
+      position: relative;
+      margin: 2.4rem 0;
+      padding: 1.5rem 1.6rem 1.5rem 2rem;
+      border-left: 6px solid var(--gold);
+      border-radius: 0 16px 16px 0;
+      background: #f7efe1;
+      font-size: clamp(1.25rem, 2.4vw, 1.7rem);
+      line-height: 1.38;
+      font-weight: 700;
+    }
+
+    .grid-3,
+    .grid-2,
+    .examples,
+    .dictionary-grid {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .examples { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .dictionary-grid { grid-template-columns: 1.25fr 0.75fr 0.75fr; }
+
+    .info-card,
+    .example-card,
+    .dictionary-card,
+    .step-card,
+    .reader-card {
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: #fff;
+    }
+
+    .info-card,
+    .dictionary-card,
+    .reader-card { padding: 1.35rem; }
+
+    .info-card p,
+    .reader-card p { margin-bottom: 0; }
+
+    .tiny-label {
+      display: block;
+      margin-bottom: 0.5rem;
+      color: var(--accent-dark);
+      font-size: 0.7rem;
+    }
+
+    .dictionary-card h3 { color: var(--accent-dark); }
+
+    .term-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .term-list li {
+      padding: 0.8rem 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .term-list li:first-child { border-top: 0; padding-top: 0; }
+
+    .term-list strong {
+      display: inline-block;
+      min-width: 6.5rem;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--accent-dark);
+    }
+
+    .term-list em { color: var(--muted); }
+
+    .stamp {
+      margin-top: 1.1rem;
+      gap: 0.45rem;
+    }
+
+    .stamp div {
+      padding: 0.8rem 0.4rem;
+      border: 1px solid #d9c9b8;
+      background: #faf5ec;
+      font-size: 0.76rem;
+    }
+
+    .example-card {
+      display: flex;
+      flex-direction: column;
+      padding: 1.4rem;
+    }
+
+    .example-number {
+      margin: 0 0 1rem;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--accent);
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .sentence {
+      margin: 0 0 1rem;
+      font-size: 1.25rem;
+      line-height: 1.4;
+      font-weight: 700;
+    }
+
+    .example-card .explanation { margin-top: 0; }
+
+    .system-name {
+      margin: auto 0 0;
+      padding-top: 1rem;
+      color: var(--muted);
+      font-size: 0.87rem;
+      font-style: italic;
+    }
+
+    .pattern-table-wrap { overflow-x: auto; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      border-spacing: 0;
+    }
+
+    caption {
+      text-align: left;
+      margin-bottom: 0.75rem;
+      font-family: Arial, Helvetica, sans-serif;
+      font-weight: 800;
+    }
+
+    th, td {
+      padding: 1rem;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--accent-dark);
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    tbody tr:last-child td { border-bottom: 0; }
+
+    .movement {
+      white-space: nowrap;
+      font-family: Arial, Helvetica, sans-serif;
+      font-weight: 800;
+      color: var(--accent-dark);
+    }
+
+    .steps {
+      display: grid;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .step-card {
+      display: grid;
+      grid-template-columns: 64px minmax(0, 1fr);
+      overflow: hidden;
+    }
+
+    .step-number {
+      display: grid;
+      place-items: center;
+      min-height: 100%;
+      background: var(--accent-dark);
+      color: #fff;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 1.4rem;
+      font-weight: 800;
+    }
+
+    .step-copy { padding: 1.2rem 1.35rem; }
+    .step-copy p { margin: 0.35rem 0 0; }
+
+    .closing-line {
+      margin: 2.2rem 0 0;
+      padding: 1.15rem 1.25rem;
+      border-radius: 14px;
+      background: var(--ink);
+      color: #fff;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: clamp(1rem, 2vw, 1.3rem);
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-align: center;
+      text-transform: uppercase;
+    }
+
+    footer {
+      width: min(1120px, calc(100% - 2rem));
+      margin: -1rem auto 3rem;
+      color: var(--muted);
+      font-size: 0.86rem;
+      text-align: center;
+    }
+
+    :focus-visible {
+      outline: 3px solid var(--gold);
+      outline-offset: 4px;
+    }
+
+    @media (max-width: 900px) {
+      .examples,
+      .dictionary-grid,
+      .grid-3 { grid-template-columns: 1fr; }
+      .grid-2 { grid-template-columns: 1fr; }
+      .cover { min-height: auto; }
+    }
+
+    @media (max-width: 680px) {
+      body { font-size: 17px; }
+      .site-header { position: static; }
+      .site-header-inner { align-items: flex-start; padding: 0.9rem 0; }
+      .site-nav { display: none; }
+      main { width: min(100% - 1rem, 1120px); margin-top: 0.5rem; }
+      .page { border-radius: 16px; padding: 1.5rem; }
+      .cover h1 { font-size: clamp(3.5rem, 20vw, 6rem); }
+      .cover-stamp,
+      .stamp { grid-template-columns: 1fr; }
+      .section-topline { margin-bottom: 1.8rem; }
+      .step-card { grid-template-columns: 52px minmax(0, 1fr); }
+      th, td { padding: 0.75rem; }
+    }
+
+    @media print {
+      :root { --shadow: none; }
+      body { background: #fff; font-size: 11pt; }
+      .site-header { display: none; }
+      main { width: 100%; margin: 0; }
+      .page {
+        min-height: 10in;
+        margin: 0;
+        border: 0;
+        border-radius: 0;
+        box-shadow: none;
+        page-break-after: always;
+        break-after: page;
+      }
+      .page:last-child { page-break-after: auto; break-after: auto; }
+      .cover { min-height: 10in; }
+      footer { display: none; }
+      a { text-decoration: none; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#content">Skip to main content</a>
+
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a class="brand" href="#top">The Meaning Map</a>
+      <nav class="site-nav" aria-label="Magazine sections">
+        <a href="#big-idea">Big idea</a>
+        <a href="#system">The system</a>
+        <a href="#examples">Examples</a>
+        <a href="#pattern">Pattern</a>
+        <a href="#try-it">Try it</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="content">
+    <article class="page cover" id="top" aria-labelledby="cover-title">
+      <div>
+        <p class="eyebrow">New ideas / Language / Issue 01</p>
+        <h1 id="cover-title">The Meaning Map</h1>
+        <p class="cover-deck">A simple new way to see how a sentence works.</p>
+
+        <div class="cover-stamp" aria-label="Example Meaning Map stamp">
+          <div>Connect</div>
+          <div>Across</div>
+          <div>Action</div>
+        </div>
+
+        <p class="cover-note">Inside: the three questions behind the system, six story examples, and a one-minute way to try it yourself.</p>
+      </div>
+      <p class="cover-footer">Every sentence makes a move. This system shows you which one.</p>
+    </article>
+
+    <article class="page" id="big-idea" aria-labelledby="big-idea-title">
+      <div class="section-topline">
+        <p class="section-label">The big idea</p>
+        <span class="number" aria-hidden="true">02</span>
+      </div>
+
+      <h2 id="big-idea-title">A sentence is more than a row of words.</h2>
+      <p class="lead">It guides attention, completes a movement, and leaves something behind.</p>
+
+      <div class="prose">
+        <p>Traditional grammar tells us what words are called. The Meaning Map asks a different question: <strong>what is the sentence doing as we read it?</strong></p>
+      </div>
+
+      <blockquote class="pullquote">Every sentence opens a small space of uncertainty - then closes it in a particular way.</blockquote>
+
+      <div class="prose">
+        <p>Take a very simple sentence: <q>She kept her house neat.</q> At first, <q>kept</q> could mean several things. The final word, <q>neat,</q> settles the meaning. The sentence has moved toward one condition and left that condition in place.</p>
+      </div>
+
+      <div class="grid-3" aria-label="The three Meaning Map questions">
+        <section class="info-card">
+          <span class="tiny-label">1. The job</span>
+          <h3>What is the sentence doing?</h3>
+          <p>Pointing, connecting, building, turning or settling.</p>
+        </section>
+        <section class="info-card">
+          <span class="tiny-label">2. The path</span>
+          <h3>Where does attention move?</h3>
+          <p>Toward one focus, or across several steps.</p>
+        </section>
+        <section class="info-card">
+          <span class="tiny-label">3. The after-effect</span>
+          <h3>What remains when it ends?</h3>
+          <p>A state, an active effect, or two things held together.</p>
+        </section>
+      </div>
+
+      <div class="prose" style="margin-top: 1.75rem;">
+        <p>Those three questions create a compact reading. You do not need technical training to use it. Read the sentence naturally, notice where it lands, and name the shape of the movement.</p>
+      </div>
+
+      <div class="grid-2" style="margin-top: 1.5rem;">
+        <section class="reader-card">
+          <span class="tiny-label">What this is</span>
+          <p>A practical lens for noticing how meaning unfolds in real time - useful for reading, writing, editing and teaching.</p>
+        </section>
+        <section class="reader-card">
+          <span class="tiny-label">What this is not</span>
+          <p>A replacement for grammar. It sits beside grammar and focuses on the experience of the whole sentence.</p>
+        </section>
+      </div>
+    </article>
+
+    <article class="page" id="system" aria-labelledby="system-title">
+      <div class="section-topline">
+        <p class="section-label">The system at a glance</p>
+        <span class="number" aria-hidden="true">03</span>
+      </div>
+
+      <h2 id="system-title">Three questions. Ten plain-language choices.</h2>
+      <p class="lead">The original system terms are shown in italics so the deeper framework remains visible.</p>
+
+      <div class="dictionary-grid">
+        <section class="dictionary-card">
+          <span class="tiny-label">The job</span>
+          <h3>What is it doing?</h3>
+          <ul class="term-list">
+            <li><strong>Point</strong> <em>Distinction</em><br>Introduces or identifies one thing.</li>
+            <li><strong>Connect</strong> <em>Relation</em><br>Links a person, action, object or event.</li>
+            <li><strong>Build</strong> <em>Expansion</em><br>Adds pieces to make a larger picture.</li>
+            <li><strong>Turn</strong> <em>Correction</em><br>Changes the direction or expected outcome.</li>
+            <li><strong>Settle</strong> <em>Rest</em><br>Establishes a habit, condition or repeated pattern.</li>
+          </ul>
+        </section>
+
+        <section class="dictionary-card">
+          <span class="tiny-label">The path</span>
+          <h3>Where does it move?</h3>
+          <ul class="term-list">
+            <li><strong>Toward</strong><br>Narrows toward one main point.</li>
+            <li><strong>Across</strong><br>Moves through a list, sequence or contrast.</li>
+          </ul>
+        </section>
+
+        <section class="dictionary-card">
+          <span class="tiny-label">The after-effect</span>
+          <h3>What remains?</h3>
+          <ul class="term-list">
+            <li><strong>State</strong> <em>Is</em><br>Leaves a fact, identity or completed situation.</li>
+            <li><strong>Action</strong> <em>Does</em><br>Leaves an effect still operating in the meaning.</li>
+            <li><strong>Held</strong> <em>With</em><br>Keeps two truths present together.</li>
+          </ul>
+        </section>
+      </div>
+
+      <blockquote class="pullquote">A full reading can be written as a three-part stamp: job + path + after-effect.</blockquote>
+
+      <div class="prose">
+        <p>Example: <q>She swept the floor each morning.</q> The sentence connects an action to an object, narrows toward <q>the floor,</q> and leaves a completed fact.</p>
+      </div>
+      <div class="stamp" aria-label="Connect, Toward, State">
+        <div>Connect</div>
+        <div>Toward</div>
+        <div>State</div>
+      </div>
+    </article>
+
+    <article class="page" id="examples" aria-labelledby="examples-title">
+      <div class="section-topline">
+        <p class="section-label">See it in the story</p>
+        <span class="number" aria-hidden="true">04</span>
+      </div>
+
+      <h2 id="examples-title">First, the world is introduced and made familiar.</h2>
+      <p class="lead">The story begins by pointing, connecting and settling into a routine.</p>
+
+      <div class="examples">
+        <section class="example-card">
+          <p class="example-number">Example 1</p>
+          <p class="sentence"><q>Once upon a time, there was a little red hen...</q></p>
+          <p class="explanation">The opening creates an empty story-space, then brings one clear character into focus. Once <q>hen</q> arrives, she stands as the person the story is about.</p>
+          <div class="stamp" aria-label="Point, Toward, State">
+            <div>Point</div><div>Toward</div><div>State</div>
+          </div>
+          <p class="system-name">Deeper system name: Focal Mark</p>
+        </section>
+
+        <section class="example-card">
+          <p class="example-number">Example 2</p>
+          <p class="sentence"><q>She swept the floor each morning.</q></p>
+          <p class="explanation">The action points toward one object: the floor. <q>Each morning</q> then turns the completed action into a familiar routine.</p>
+          <div class="stamp" aria-label="Connect, Toward, State">
+            <div>Connect</div><div>Toward</div><div>State</div>
+          </div>
+          <p class="system-name">Deeper system name: Direct Bearing</p>
+        </section>
+
+        <section class="example-card">
+          <p class="example-number">Example 3</p>
+          <p class="sentence"><q>The fox had sharp eyes, soft paws, and a very quiet step.</q></p>
+          <p class="explanation">The description grows across three features. Each one adds to the same larger picture of a quiet, watchful fox.</p>
+          <div class="stamp" aria-label="Build, Across, Action">
+            <div>Build</div><div>Across</div><div>Action</div>
+          </div>
+          <p class="system-name">Deeper system name: Field Distribution</p>
+        </section>
+      </div>
+    </article>
+
+    <article class="page" aria-labelledby="turn-title">
+      <div class="section-topline">
+        <p class="section-label">When the story turns</p>
+        <span class="number" aria-hidden="true">05</span>
+      </div>
+
+      <h2 id="turn-title">Contrast changes the direction of meaning.</h2>
+      <p class="lead">A single word - often <q>but</q> - can overturn what seemed likely to happen.</p>
+
+      <div class="examples">
+        <section class="example-card">
+          <p class="example-number">Example 4</p>
+          <p class="sentence"><q>She turned quickly, but the fox sprang forward and caught her.</q></p>
+          <p class="explanation">The hen seems to recover. Then <q>but</q> overturns that direction: the fox acts, and his action decides the outcome.</p>
+          <div class="stamp" aria-label="Turn, Across, Action">
+            <div>Turn</div><div>Across</div><div>Action</div>
+          </div>
+          <p class="system-name">Deeper system name: Corrective Turn</p>
+        </section>
+
+        <section class="example-card">
+          <p class="example-number">Example 5</p>
+          <p class="sentence"><q>The little red hen was frightened, but she was clever.</q></p>
+          <p class="explanation">Cleverness does not cancel fear. The sentence holds both truths together around the same character.</p>
+          <div class="stamp" aria-label="Connect, Toward, Held">
+            <div>Connect</div><div>Toward</div><div>Held</div>
+          </div>
+          <p class="system-name">Deeper system name: Pivoted Balance</p>
+        </section>
+
+        <section class="example-card">
+          <p class="example-number">Example 6</p>
+          <p class="sentence"><q>The stone fell out... and sent hot water everywhere.</q></p>
+          <p class="explanation">Cause becomes result: the stone falls, then water scatters. Together, the events form one completed chain.</p>
+          <div class="stamp" aria-label="Connect, Across, State">
+            <div>Connect</div><div>Across</div><div>State</div>
+          </div>
+        </section>
+      </div>
+    </article>
+
+    <article class="page" id="pattern" aria-labelledby="pattern-title">
+      <div class="section-topline">
+        <p class="section-label">The larger pattern</p>
+        <span class="number" aria-hidden="true">06</span>
+      </div>
+
+      <h2 id="pattern-title">A whole story can be seen as a sequence of sentence moves.</h2>
+      <p class="lead">The system reveals not only what happens, but how the telling changes shape.</p>
+
+      <div class="pattern-table-wrap" role="region" aria-label="Story movement table" tabindex="0">
+        <table>
+          <caption>How the story changes shape</caption>
+          <thead>
+            <tr>
+              <th scope="col">Story phase</th>
+              <th scope="col">A line from the story</th>
+              <th scope="col">The movement</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Arrival</strong></td><td><q>There was a little red hen...</q></td><td class="movement">Point &rarr; Toward &rarr; State</td></tr>
+            <tr><td><strong>Routine</strong></td><td><q>She kept her house neat.</q></td><td class="movement">Settle &rarr; Toward &rarr; Held</td></tr>
+            <tr><td><strong>Threat</strong></td><td><q>The sly fox crept from behind a bush.</q></td><td class="movement">Connect &rarr; Toward &rarr; State</td></tr>
+            <tr><td><strong>Reversal</strong></td><td><q>...but the fox sprang forward...</q></td><td class="movement">Turn &rarr; Across &rarr; Action</td></tr>
+            <tr><td><strong>Escape</strong></td><td><q>She slipped out... and hid behind a tree.</q></td><td class="movement">Connect &rarr; Across &rarr; State</td></tr>
+            <tr><td><strong>New habit</strong></td><td><q>She listened carefully whenever the leaves rustled.</q></td><td class="movement">Settle &rarr; Across &rarr; State</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <blockquote class="pullquote">The plot moves from introduction, to routine, to danger, to reversal, to a wiser routine.</blockquote>
+
+      <div class="prose">
+        <p>This is where the system becomes more than a label. Repeated sentence shapes create rhythm. Turns create surprise. Across-movements create momentum. Settling movements create the sense that a new normal has been reached.</p>
+      </div>
+    </article>
+
+    <article class="page" id="try-it" aria-labelledby="try-title">
+      <div class="section-topline">
+        <p class="section-label">Try it yourself</p>
+        <span class="number" aria-hidden="true">07</span>
+      </div>
+
+      <h2 id="try-title">The one-minute Meaning Map test</h2>
+      <p class="lead">Choose any sentence. Read it once for sense, then answer these three questions.</p>
+
+      <div class="steps">
+        <section class="step-card">
+          <div class="step-number" aria-hidden="true">1</div>
+          <div class="step-copy">
+            <h3>Name the job</h3>
+            <p>Is it pointing, connecting, building, turning or settling?</p>
+          </div>
+        </section>
+
+        <section class="step-card">
+          <div class="step-number" aria-hidden="true">2</div>
+          <div class="step-copy">
+            <h3>Trace the path</h3>
+            <p>Does attention narrow toward one point, or move across several parts?</p>
+          </div>
+        </section>
+
+        <section class="step-card">
+          <div class="step-number" aria-hidden="true">3</div>
+          <div class="step-copy">
+            <h3>Notice the after-effect</h3>
+            <p>Are you left with a state, an active effect, or two truths held together?</p>
+          </div>
+        </section>
+      </div>
+
+      <blockquote class="pullquote">Do not hunt for the <q>correct</q> label too quickly. First notice the movement you actually experience.</blockquote>
+
+      <div class="grid-2">
+        <section class="reader-card">
+          <span class="tiny-label">For writers</span>
+          <p>Use the map to vary rhythm. Too many Connect + Toward sentences may feel flat; a Build or Turn can change the pace.</p>
+        </section>
+        <section class="reader-card">
+          <span class="tiny-label">For readers</span>
+          <p>Use it to explain why a sentence feels calm, surprising, cumulative, balanced or final.</p>
+        </section>
+      </div>
+
+      <div class="prose" style="margin-top: 1.75rem;">
+        <p>The Meaning Map begins with a simple promise: sentences are not static containers. They unfold. Once you learn to see that movement, familiar writing becomes newly visible.</p>
+      </div>
+
+      <p class="closing-line">Read the words. Trace the move. Name what remains.</p>
+    </article>
+  </main>
+
+  <footer>
+    <p>The Meaning Map - a plain-language guide to how sentences move.</p>
+  </footer>
+</body>
+</html>
